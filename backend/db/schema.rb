@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_19_100354) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_19_103351) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,6 +23,29 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_19_100354) do
     t.datetime "updated_at", null: false
     t.bigint "worker_profile_id", null: false
     t.index ["worker_profile_id"], name: "index_availabilities_on_worker_profile_id"
+  end
+
+  create_table "job_applications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "job_id", null: false
+    t.string "status"
+    t.datetime "updated_at", null: false
+    t.bigint "worker_profile_id", null: false
+    t.index ["job_id"], name: "index_job_applications_on_job_id"
+    t.index ["worker_profile_id"], name: "index_job_applications_on_worker_profile_id"
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.decimal "budget", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.bigint "customer_id", null: false
+    t.text "description"
+    t.string "location"
+    t.string "skill_required"
+    t.string "status"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_jobs_on_customer_id"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -67,6 +90,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_19_100354) do
   end
 
   add_foreign_key "availabilities", "worker_profiles"
+  add_foreign_key "job_applications", "jobs"
+  add_foreign_key "job_applications", "worker_profiles"
+  add_foreign_key "jobs", "users", column: "customer_id"
   add_foreign_key "worker_profiles", "users"
   add_foreign_key "worker_skills", "skills"
   add_foreign_key "worker_skills", "worker_profiles"

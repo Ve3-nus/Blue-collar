@@ -3,6 +3,9 @@ class User < ApplicationRecord
 
   has_one :worker_profile,
           dependent: :destroy
+          has_many :jobs,
+         foreign_key: :customer_id,
+         dependent: :destroy
 
   validates :email,
             presence: true,

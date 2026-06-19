@@ -6,6 +6,9 @@ class WorkerProfile < ApplicationRecord
 
   has_many :skills,
            through: :worker_skills
+  
+  has_many :job_applications,
+         dependent: :destroy
 
   has_many :availabilities,
            dependent: :destroy

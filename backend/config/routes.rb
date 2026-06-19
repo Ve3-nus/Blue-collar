@@ -2,22 +2,24 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
 
-      post '/register',
-           to: 'auth#register'
-
-      post '/login',
-           to: 'auth#login'
-
-      get '/me',
-          to: 'auth#me'
+      post '/register', to: 'auth#register'
+      post '/login',    to: 'auth#login'
+      get  '/me',       to: 'auth#me'
 
       resources :worker_profiles,
-          only: [
-            :index,
-            :create,
-            :show,
-            :update
-          ]
+                only: [
+                  :index,
+                  :create,
+                  :show,
+                  :update
+                ]
+
+      resources :jobs,
+                only: [
+                  :index,
+                  :create,
+                  :show
+                ]
 
     end
   end
