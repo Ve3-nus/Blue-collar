@@ -164,3 +164,215 @@ Processing by Api::V1::AuthController#login as */*
 Completed 200 OK in 286ms (Views: 3.2ms | ActiveRecord: 36.8ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/me" for 127.0.0.1 at 2026-06-19 13:12:48 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (3.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate
+
+You have 4 pending migrations:
+
+db/migrate/20260619100159_create_worker_profiles.rb
+db/migrate/20260619100319_create_skills.rb
+db/migrate/20260619100338_create_worker_skills.rb
+db/migrate/20260619100354_create_availabilities.rb
+
+
+):
+  
+activerecord (8.1.3) lib/active_record/migration.rb:743:in `check_pending_migrations'
+activerecord (8.1.3) lib/active_record/migration.rb:660:in `block (2 levels) in call'
+activesupport (8.1.3) lib/active_support/file_update_checker.rb:88:in `execute'
+activerecord (8.1.3) lib/active_record/migration.rb:665:in `block in call'
+activerecord (8.1.3) lib/active_record/migration.rb:657:in `synchronize'
+activerecord (8.1.3) lib/active_record/migration.rb:657:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.1.3) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (8.1.3) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/executor.rb:20:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.1.3) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.1.3) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/remote_ip.rb:98:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.6) lib/rack/runtime.rb:24:in `call'
+activesupport (8.1.3) lib/active_support/cache/strategy/local_cache_middleware.rb:30:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.1.3) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.1.3) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/executor.rb:20:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.6) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (3.0.0) lib/rack/cors.rb:102:in `call'
+railties (8.1.3) lib/rails/engine.rb:534:in `call'
+puma (8.0.2) lib/puma/configuration.rb:305:in `call'
+puma (8.0.2) lib/puma/response.rb:79:in `block in handle_request'
+puma (8.0.2) lib/puma/thread_pool.rb:434:in `with_force_shutdown'
+puma (8.0.2) lib/puma/response.rb:78:in `handle_request'
+puma (8.0.2) lib/puma/server.rb:508:in `process_client'
+puma (8.0.2) lib/puma/server.rb:263:in `block in run'
+puma (8.0.2) lib/puma/thread_pool.rb:246:in `block in spawn_thread'
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35m (95.6ms)[0m  [1m[35mCREATE DATABASE "backend_development" ENCODING = 'unicode' /*application='Backend'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35m (74.9ms)[0m  [1m[35mCREATE DATABASE "backend_test" ENCODING = 'unicode' /*application='Backend'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (4.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Backend'*/[0m
+Migrating to CreateWorkerProfiles (20260619100159)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK /*application='Backend'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35m (122.9ms)[0m  [1m[35mCREATE DATABASE "backend_development" ENCODING = 'unicode' /*application='Backend'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35m (75.4ms)[0m  [1m[35mCREATE DATABASE "backend_test" ENCODING = 'unicode' /*application='Backend'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Backend'*/[0m
+Migrating to CreateWorkerProfiles (20260619100159)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='Backend'*/[0m
+  [1m[35m (27.4ms)[0m  [1m[35mCREATE TABLE "worker_profiles" ("id" bigserial primary key, "user_id" bigint NOT NULL, "bio" text, "location" character varying, "experience_years" integer, "hourly_rate" decimal(10,2), "verified" boolean DEFAULT FALSE, "average_rating" decimal(3,2), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_a2fff7c7ea"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+) /*application='Backend'*/[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE INDEX "index_worker_profiles_on_user_id" ON "worker_profiles" ("user_id") /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260619100159') RETURNING "version" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT /*application='Backend'*/[0m
+Migrating to CreateSkills (20260619100319)
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35m (145.1ms)[0m  [1m[35mCREATE DATABASE "backend_development" ENCODING = 'unicode' /*application='Backend'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35m (84.8ms)[0m  [1m[35mCREATE DATABASE "backend_test" ENCODING = 'unicode' /*application='Backend'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Backend'*/[0m
+Migrating to CreateSkills (20260619100319)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Backend'*/[0m
+Migrating to CreateSkills (20260619100319)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Backend'*/[0m
+Migrating to CreateSkills (20260619100319)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Backend'*/[0m
+  [1m[35m (22.7ms)[0m  [1m[35mCREATE TABLE "skills" ("id" bigserial primary key, "name" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260619100319') RETURNING "version" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT /*application='Backend'*/[0m
+Migrating to CreateWorkerSkills (20260619100338)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='Backend'*/[0m
+  [1m[35m (8.7ms)[0m  [1m[35mCREATE TABLE "worker_skills" ("id" bigserial primary key, "worker_profile_id" bigint NOT NULL, "skill_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_40e464e3f0"
+FOREIGN KEY ("worker_profile_id")
+  REFERENCES "worker_profiles" ("id")
+, CONSTRAINT "fk_rails_3150d64e20"
+FOREIGN KEY ("skill_id")
+  REFERENCES "skills" ("id")
+) /*application='Backend'*/[0m
+  [1m[35m (3.0ms)[0m  [1m[35mCREATE INDEX "index_worker_skills_on_worker_profile_id" ON "worker_skills" ("worker_profile_id") /*application='Backend'*/[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE INDEX "index_worker_skills_on_skill_id" ON "worker_skills" ("skill_id") /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260619100338') RETURNING "version" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*application='Backend'*/[0m
+Migrating to CreateAvailabilities (20260619100354)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='Backend'*/[0m
+  [1m[35m (8.4ms)[0m  [1m[35mCREATE TABLE "availabilities" ("id" bigserial primary key, "worker_profile_id" bigint NOT NULL, "date" date, "start_time" time, "end_time" time, "available" boolean, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_460c34be9b"
+FOREIGN KEY ("worker_profile_id")
+  REFERENCES "worker_profiles" ("id")
+) /*application='Backend'*/[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE INDEX "index_availabilities_on_worker_profile_id" ON "availabilities" ("worker_profile_id") /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260619100354') RETURNING "version" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT /*application='Backend'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Backend'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Backend'*/[0m
+Started GET "/me" for 127.0.0.1 at 2026-06-19 13:24:13 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (4.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  
+ActionController::RoutingError (No route matches [GET] "/me"):
+  
+Started GET "/auth/me" for 127.0.0.1 at 2026-06-19 13:24:37 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/auth/me"):
+  
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-19 13:25:14 +0300
+Processing by Api::V1::AuthController#me as */*
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 15ms (Views: 3.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-19 13:25:52 +0300
+Processing by Api::V1::AuthController#login as */*
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (5.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'venus@test.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 957ms (Views: 1.7ms | ActiveRecord: 63.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-19 13:26:48 +0300
+Processing by Api::V1::AuthController#me as */*
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (41.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 171ms (Views: 12.6ms | ActiveRecord: 41.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/wprker_profiles" for 127.0.0.1 at 2026-06-19 13:27:25 +0300
+  
+ActionController::RoutingError (No route matches [POST] "/api/v1/wprker_profiles"):
+  
+Started POST "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-19 13:27:31 +0300
+Processing by Api::V1::WorkerProfilesController#create as */*
+  Parameters: {"bio"=>"Certified electrician with 5 years experience", "location"=>"Nairobi", "experience_years"=>5, "hourly_rate"=>1500, "worker_profile"=>{"bio"=>"Certified electrician with 5 years experience", "location"=>"Nairobi", "experience_years"=>5, "hourly_rate"=>1500}}
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+[31mUnpermitted parameter: :worker_profile. Context: { controller: Api::V1::WorkerProfilesController, action: create, request: #<ActionDispatch::Request:0x000001ad345ed0c0>, params: {"bio"=>"Certified electrician with 5 years experience", "location"=>"Nairobi", "experience_years"=>5, "hourly_rate"=>1500, "controller"=>"api/v1/worker_profiles", "action"=>"create", "worker_profile"=>{"bio"=>"Certified electrician with 5 years experience", "location"=>"Nairobi", "experience_years"=>5, "hourly_rate"=>1500}} }[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN /*action='create',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:5:in `create'
+  [1m[36mWorkerProfile Create (230.9ms)[0m  [1m[32mINSERT INTO "worker_profiles" ("user_id", "bio", "location", "experience_years", "hourly_rate", "verified", "average_rating", "created_at", "updated_at") VALUES (1, 'Certified electrician with 5 years experience', 'Nairobi', 5, 1500.0, FALSE, NULL, '2026-06-19 10:27:32.323336', '2026-06-19 10:27:32.323336') RETURNING "id" /*action='create',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT /*action='create',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:5:in `create'
+  [1m[36mWorkerProfile Load (0.5ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 1 LIMIT 1 /*action='create',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:5:in `create'
+Completed 201 Created in 442ms (Views: 0.4ms | ActiveRecord: 277.8ms (3 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-19 13:27:45 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/api/v1/worker_profiles"):
+  
+Started GET "/api/v1/worker_profiles/1" for 127.0.0.1 at 2026-06-19 13:28:20 +0300
+Processing by Api::V1::WorkerProfilesController#show as */*
+  Parameters: {"bio"=>"Certified electrician with 5 years experience", "location"=>"Nairobi", "experience_years"=>5, "hourly_rate"=>1500, "id"=>"1", "worker_profile"=>{"bio"=>"Certified electrician with 5 years experience", "location"=>"Nairobi", "experience_years"=>5, "hourly_rate"=>1500}}
+  [1m[36mUser Load (29.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='show',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (1.8ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."id" = 1 LIMIT 1 /*action='show',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:19:in `show'
+Completed 200 OK in 102ms (Views: 7.6ms | ActiveRecord: 31.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-19 13:30:39 +0300
+Processing by Api::V1::WorkerProfilesController#index as */*
+  Parameters: {"bio"=>"Certified electrician with 5 years experience", "location"=>"Nairobi", "experience_years"=>5, "hourly_rate"=>1500, "worker_profile"=>{"bio"=>"Certified electrician with 5 years experience", "location"=>"Nairobi", "experience_years"=>5, "hourly_rate"=>1500}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (1.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:7:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:7:in `index'
+Completed 200 OK in 127ms (Views: 77.4ms | ActiveRecord: 45.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
