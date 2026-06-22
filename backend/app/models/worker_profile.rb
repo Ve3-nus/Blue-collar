@@ -12,6 +12,8 @@ class WorkerProfile < ApplicationRecord
 
   has_many :availabilities,
            dependent: :destroy
+  has_many :reviews,
+         dependent: :destroy
 
   validates :location,
             presence: true
@@ -27,4 +29,7 @@ class WorkerProfile < ApplicationRecord
               greater_than_or_equal_to: 0
             },
             allow_nil: true
+  def average_rating
+    reviews.average(:rating)&.round(1) || 0
+  end
 end

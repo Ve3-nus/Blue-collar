@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_19_103351) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_22_091239) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -46,6 +46,29 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_19_103351) do
     t.string "title"
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_jobs_on_customer_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "message"
+    t.boolean "read", default: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.bigint "customer_id", null: false
+    t.bigint "job_id", null: false
+    t.integer "rating", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "worker_profile_id", null: false
+    t.index ["customer_id"], name: "index_reviews_on_customer_id"
+    t.index ["job_id"], name: "index_reviews_on_job_id"
+    t.index ["worker_profile_id"], name: "index_reviews_on_worker_profile_id"
   end
 
   create_table "skills", force: :cascade do |t|
@@ -93,6 +116,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_19_103351) do
   add_foreign_key "job_applications", "jobs"
   add_foreign_key "job_applications", "worker_profiles"
   add_foreign_key "jobs", "users", column: "customer_id"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "reviews", "jobs"
+  add_foreign_key "reviews", "users", column: "customer_id"
+  add_foreign_key "reviews", "worker_profiles"
   add_foreign_key "worker_profiles", "users"
   add_foreign_key "worker_skills", "skills"
   add_foreign_key "worker_skills", "worker_profiles"

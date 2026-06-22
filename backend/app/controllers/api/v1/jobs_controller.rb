@@ -11,6 +11,18 @@ class Api::V1::JobsController < ApplicationController
 
     render json: jobs
   end
+def applicants
+  job = Job.find(params[:id])
+
+  render json: job.job_applications.includes(
+    :worker_profile
+  )
+end
+def my_jobs
+  jobs = current_user.jobs
+
+  render json: jobs
+end
 
   def create
     job = current_user.jobs.build(

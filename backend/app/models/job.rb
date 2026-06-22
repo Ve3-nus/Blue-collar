@@ -4,6 +4,8 @@ class Job < ApplicationRecord
 
   has_many :job_applications,
            dependent: :destroy
+  has_one :review,
+        dependent: :destroy
 
   validates :title,
             presence: true
@@ -19,4 +21,14 @@ class Job < ApplicationRecord
 
   validates :status,
             presence: true
+            validates :status,
+          inclusion: {
+            in: %w[
+              open
+              accepted
+              in_progress
+              completed
+              cancelled
+            ]
+          }
 end

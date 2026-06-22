@@ -6,6 +6,19 @@ Rails.application.routes.draw do
       post '/login',    to: 'auth#login'
       get  '/me',       to: 'auth#me'
 
+      # Customer Dashboard
+      get '/my_jobs',
+          to: 'jobs#my_jobs'
+          get '/my_applications',
+          to: 'job_applications#my_applications'
+
+      # View applicants for a job
+      get '/jobs/:id/applicants',
+          to: 'jobs#applicants'
+
+      get '/worker_profiles/:id/rating',
+          to: 'worker_profiles#rating'
+
       resources :worker_profiles,
                 only: [
                   :index,
@@ -21,6 +34,32 @@ Rails.application.routes.draw do
                   :show
                 ]
 
+      resources :worker_skills,
+                only: [
+                  :index,
+                  :create,
+                  :destroy
+                ]
+
+      resources :job_applications,
+                only: [
+                  :create,
+                  :index,
+                  :update
+                ]
+
+      resources :notifications,
+                only: [
+                  :index,
+                  :update
+                ]
+resources :reviews,
+          only: [
+            :create,
+            :index,
+            :show
+          ]
+          
     end
   end
 end

@@ -1,12 +1,18 @@
 class Api::V1::WorkerProfilesController < ApplicationController
   before_action :authorize_request
 
-  def index
-    workers = WorkerProfile.includes(:user)
+ def index
+  workers = WorkerProfile.includes(:skills)
 
-    render json: workers
+  if params[:skill].present?
+    workers = workers.joins(:skills)
+                     .where(skills: {
+                       name: params[:skill]
+                     })
   end
 
+  render json: workers
+end
   def create
     profile = current_user.create_worker_profile(
       worker_profile_params
@@ -37,6 +43,15 @@ class Api::V1::WorkerProfilesController < ApplicationController
         errors: profile.errors.full_messages
       }, status: :unprocessable_entity
     end
+  end
+
+  def rating
+    worker = WorkerProfile.find(params[:id])
+
+    render json: {
+      average_rating: worker.average_rating,
+      reviews_count: worker.reviews.count
+    }
   end
 
   private
