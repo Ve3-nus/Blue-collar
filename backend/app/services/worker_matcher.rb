@@ -7,6 +7,5 @@ class WorkerMatcher
           name: job.skill_required
         }
       )
-      .distinct
   end
 end

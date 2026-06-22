@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       get '/worker_profiles/:id/rating',
           to: 'worker_profiles#rating'
 
+      get '/jobs/:id/matches',
+    to: 'jobs#matches'
+
       resources :worker_profiles,
                 only: [
                   :index,

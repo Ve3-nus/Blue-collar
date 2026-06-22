@@ -23,6 +23,13 @@ def my_jobs
 
   render json: jobs
 end
+def matches
+  job = Job.find(params[:id])
+
+  workers = WorkerMatcher.match(job)
+
+  render json: workers
+end
 
   def create
     job = current_user.jobs.build(

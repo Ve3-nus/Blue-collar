@@ -27,11 +27,16 @@ end
     end
   end
 
-  def show
-    profile = WorkerProfile.find(params[:id])
+ def show
+  worker = WorkerProfile.find(params[:id])
 
-    render json: profile
-  end
+  render json: {
+    worker: worker,
+    skills: worker.skills,
+    reviews: worker.reviews,
+    rating: worker.average_rating
+  }
+end
 
   def update
     profile = current_user.worker_profile
