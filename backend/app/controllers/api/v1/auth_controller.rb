@@ -24,6 +24,12 @@ class Api::V1::AuthController < ApplicationController
 
     if user&.authenticate(params[:password])
 
+  if user.status == "suspended"
+    return render json: {
+      error: "Account suspended"
+    }, status: :forbidden
+  end
+
       token = JsonWebToken.encode(
         user_id: user.id
       )

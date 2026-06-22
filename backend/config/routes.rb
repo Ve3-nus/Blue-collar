@@ -21,6 +21,23 @@ Rails.application.routes.draw do
 
       get '/jobs/:id/matches',
     to: 'jobs#matches'
+    get '/admin/users',
+    to: 'admin#users'
+
+get '/admin/jobs',
+    to: 'admin#jobs'
+
+get '/admin/applications',
+    to: 'admin#applications'
+
+get '/admin/reviews',
+    to: 'admin#reviews'
+patch '/admin/users/:id/suspend',
+      to: 'admin#suspend_user'
+patch '/admin/users/:id/activate',
+      to: 'admin#activate_user'  
+get '/admin/stats',
+    to: 'admin#stats'
 
       resources :worker_profiles,
                 only: [

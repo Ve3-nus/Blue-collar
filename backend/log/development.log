@@ -1236,3 +1236,48 @@ Processing by Api::V1::WorkerProfilesController#rating as */*
 Completed 200 OK in 323ms (Views: 1.0ms | ActiveRecord: 365.9ms (4 queries, 0 cached) | GC: 0.2ms)
 
 
+Started GET "/api/v1/worker_profiles?locatio=Nairobi" for 127.0.0.1 at 2026-06-22 13:22:16 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (5.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by Api::V1::WorkerProfilesController#index as */*
+  Parameters: {"job_id"=>1, "worker_profile_id"=>1, "rating"=>5, "comment"=>"Excellent work and very professional.", "locatio"=>"Nairobi", "worker_profile"=>{}}
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (2.4ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (2.5ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (3.9ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:33:in `average_rating'
+Completed 200 OK in 195ms (Views: 84.9ms | ActiveRecord: 141.7ms (4 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/api/v1/worker_profiles?skill=Electrician&location=Nairobi" for 127.0.0.1 at 2026-06-22 13:22:38 +0300
+Processing by Api::V1::WorkerProfilesController#index as */*
+  Parameters: {"job_id"=>1, "worker_profile_id"=>1, "rating"=>5, "comment"=>"Excellent work and very professional.", "skill"=>"Electrician", "location"=>"Nairobi", "worker_profile"=>{}}
+  [1m[36mUser Load (3.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Eager Load (3.5ms)[0m  [1m[34mSELECT "worker_profiles"."id" AS t0_r0, "worker_profiles"."user_id" AS t0_r1, "worker_profiles"."bio" AS t0_r2, "worker_profiles"."location" AS t0_r3, "worker_profiles"."experience_years" AS t0_r4, "worker_profiles"."hourly_rate" AS t0_r5, "worker_profiles"."verified" AS t0_r6, "worker_profiles"."average_rating" AS t0_r7, "worker_profiles"."created_at" AS t0_r8, "worker_profiles"."updated_at" AS t0_r9, "skills"."id" AS t1_r0, "skills"."name" AS t1_r1, "skills"."created_at" AS t1_r2, "skills"."updated_at" AS t1_r3 FROM "worker_profiles" INNER JOIN "worker_skills" ON "worker_skills"."worker_profile_id" = "worker_profiles"."id" INNER JOIN "skills" ON "skills"."id" = "worker_skills"."skill_id" WHERE "skills"."name" = 'Electrician' /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+Completed 200 OK in 274ms (Views: 252.2ms | ActiveRecord: 10.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs/1/mathces" for 127.0.0.1 at 2026-06-22 13:25:22 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/api/v1/jobs/1/mathces"):
+  
+Started GET "/api/v1/jobs/1/matches" for 127.0.0.1 at 2026-06-22 13:25:26 +0300
+Processing by Api::V1::JobsController#matches as */*
+  Parameters: {"job_id"=>1, "worker_profile_id"=>1, "rating"=>5, "comment"=>"Excellent work and very professional.", "id"=>"1", "job"=>{}}
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='matches',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (6.1ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = 1 LIMIT 1 /*action='matches',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:27:in `matches'
+  [1m[36mWorkerProfile Load (9.6ms)[0m  [1m[34mSELECT DISTINCT "worker_profiles".* FROM "worker_profiles" INNER JOIN "worker_skills" ON "worker_skills"."worker_profile_id" = "worker_profiles"."id" INNER JOIN "skills" ON "skills"."id" = "worker_skills"."skill_id" WHERE "skills"."name" = 'Plumber' /*action='matches',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:31:in `matches'
+Completed 200 OK in 336ms (Views: 5.5ms | ActiveRecord: 83.3ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/api/v1/jobs/1/dashboard/customer" for 127.0.0.1 at 2026-06-22 13:27:01 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/api/v1/jobs/1/dashboard/customer"):
+  
