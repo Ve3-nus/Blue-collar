@@ -1281,3 +1281,126 @@ Started GET "/api/v1/jobs/1/dashboard/customer" for 127.0.0.1 at 2026-06-22 13:2
   
 ActionController::RoutingError (No route matches [GET] "/api/v1/jobs/1/dashboard/customer"):
   
+Started GET "/api/v1/admin/users" for 127.0.0.1 at 2026-06-22 13:34:02 +0300
+Processing by Api::V1::AdminController#users as */*
+  Parameters: {"job_id"=>1, "worker_profile_id"=>1, "rating"=>5, "comment"=>"Excellent work and very professional.", "admin"=>{"job_id"=>1, "worker_profile_id"=>1, "rating"=>5, "comment"=>"Excellent work and very professional."}}
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Filter chain halted as :authorize_admin rendered or redirected
+Completed 403 Forbidden in 222ms (Views: 0.3ms | ActiveRecord: 78.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/users" for 127.0.0.1 at 2026-06-22 13:34:37 +0300
+Processing by Api::V1::AdminController#users as */*
+  Parameters: {"job_id"=>1, "worker_profile_id"=>1, "rating"=>5, "comment"=>"Excellent work and very professional.", "admin"=>{"job_id"=>1, "worker_profile_id"=>1, "rating"=>5, "comment"=>"Excellent work and very professional."}}
+  [1m[36mUser Load (3.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Filter chain halted as :authorize_admin rendered or redirected
+Completed 403 Forbidden in 17ms (Views: 1.1ms | ActiveRecord: 3.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-22 13:34:41 +0300
+Processing by Api::V1::AuthController#me as */*
+  Parameters: {"job_id"=>1, "worker_profile_id"=>1, "rating"=>5, "comment"=>"Excellent work and very professional.", "auth"=>{"job_id"=>1, "worker_profile_id"=>1, "rating"=>5, "comment"=>"Excellent work and very professional."}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 13ms (Views: 7.9ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (3.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Backend'*/[0m
+Migrating to CreateActiveStorageTables (20260622103613)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*application='Backend'*/[0m
+  [1m[35m (37.5ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" bigserial primary key, "key" character varying NOT NULL, "filename" character varying NOT NULL, "content_type" character varying, "metadata" text, "service_name" character varying NOT NULL, "byte_size" bigint NOT NULL, "checksum" character varying, "created_at" timestamp(6) NOT NULL) /*application='Backend'*/[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key") /*application='Backend'*/[0m
+  [1m[35m (17.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" bigserial primary key, "name" character varying NOT NULL, "record_type" character varying NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+) /*application='Backend'*/[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id") /*application='Backend'*/[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id") /*application='Backend'*/[0m
+  [1m[35m (14.1ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" bigserial primary key, "blob_id" bigint NOT NULL, "variation_digest" character varying NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+) /*application='Backend'*/[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest") /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (3.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260622103613') RETURNING "version" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (5.1ms)[0m  [1m[35mCOMMIT /*application='Backend'*/[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Backend'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Backend'*/[0m
+Started PATCH "/api/v1/worker_profiles/upload_photo" for 127.0.0.1 at 2026-06-22 14:18:58 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (3.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by Api::V1::WorkerProfilesController#upload_photo as */*
+  Parameters: {"job_id"=>1, "worker_profile_id"=>1, "rating"=>5, "comment"=>"Excellent work and very professional.", "worker_profile"=>{}}
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='upload_photo',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (3.6ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 1 LIMIT 1 /*action='upload_photo',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:30:in `upload_photo'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN /*action='upload_photo',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:32:in `upload_photo'
+  [1m[36mActiveStorage::Attachment Load (4.9ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 1 AND "active_storage_attachments"."record_type" = 'WorkerProfile' AND "active_storage_attachments"."name" = 'profile_photo' LIMIT 1 /*action='upload_photo',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:32:in `upload_photo'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT /*action='upload_photo',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:32:in `upload_photo'
+Completed 200 OK in 128ms (Views: 0.3ms | ActiveRecord: 46.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/api/v1/worker_profiles/upload_certification" for 127.0.0.1 at 2026-06-22 14:19:16 +0300
+Processing by Api::V1::WorkerProfilesController#upload_certification as */*
+  Parameters: {"job_id"=>1, "worker_profile_id"=>1, "rating"=>5, "comment"=>"Excellent work and very professional.", "worker_profile"=>{}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='upload_certification',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 1 LIMIT 1 /*action='upload_certification',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:41:in `upload_certification'
+  [1m[36mActiveStorage::Blob Load (2.8ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = 1 AND "active_storage_attachments"."record_type" = 'WorkerProfile' AND "active_storage_attachments"."name" = 'certifications' /*action='upload_certification',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:43:in `upload_certification'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*action='upload_certification',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:43:in `upload_certification'
+  [1m[36mActiveStorage::Attachment Load (2.7ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 1 AND "active_storage_attachments"."record_type" = 'WorkerProfile' AND "active_storage_attachments"."name" = 'certifications' /*action='upload_certification',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:43:in `upload_certification'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*action='upload_certification',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:43:in `upload_certification'
+Completed 200 OK in 139ms (Views: 0.5ms | ActiveRecord: 9.2ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/api/v1/job/1/upload_images" for 127.0.0.1 at 2026-06-22 14:19:39 +0300
+  
+ActionController::RoutingError (No route matches [PATCH] "/api/v1/job/1/upload_images"):
+  
+Started PATCH "/api/v1/jobs/1/upload_images" for 127.0.0.1 at 2026-06-22 14:19:49 +0300
+Processing by Api::V1::JobsController#upload_images as */*
+  Parameters: {"job_id"=>1, "worker_profile_id"=>1, "rating"=>5, "comment"=>"Excellent work and very professional.", "id"=>"1", "job"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='upload_images',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (1.9ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = 1 LIMIT 1 /*action='upload_images',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:34:in `upload_images'
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = 1 AND "active_storage_attachments"."record_type" = 'Job' AND "active_storage_attachments"."name" = 'images' /*action='upload_images',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:36:in `upload_images'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*action='upload_images',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:36:in `upload_images'
+  [1m[36mActiveStorage::Attachment Load (3.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 1 AND "active_storage_attachments"."record_type" = 'Job' AND "active_storage_attachments"."name" = 'images' /*action='upload_images',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:36:in `upload_images'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*action='upload_images',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:36:in `upload_images'
+Completed 200 OK in 26ms (Views: 0.2ms | ActiveRecord: 9.8ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (4.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Backend'*/[0m
+Migrating to CreateMessages (20260622112253)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='Backend'*/[0m
+  [1m[35m (28.7ms)[0m  [1m[35mCREATE TABLE "messages" ("id" bigserial primary key, "sender_id" integer, "receiver_id" integer, "job_id" integer, "content" text, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20260622112253') RETURNING "version" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT /*application='Backend'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(5073945470573576205) /*application='Backend'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Backend'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Backend'*/[0m

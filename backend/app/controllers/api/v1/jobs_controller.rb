@@ -30,7 +30,17 @@ def matches
 
   render json: workers
 end
+def upload_images
+  job = Job.find(params[:id])
 
+  job.images.attach(
+    params[:images]
+  )
+
+  render json: {
+    message: "Images uploaded"
+  }
+end
   def create
     job = current_user.jobs.build(
       job_params.merge(

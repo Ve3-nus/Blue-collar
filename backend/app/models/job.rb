@@ -4,6 +4,8 @@ class Job < ApplicationRecord
 
   has_many :job_applications,
            dependent: :destroy
+  has_many_attached :images
+  
   has_one :review,
         dependent: :destroy
 

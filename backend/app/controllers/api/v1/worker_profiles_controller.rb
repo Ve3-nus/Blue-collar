@@ -26,15 +26,41 @@ end
       }, status: :unprocessable_entity
     end
   end
+  def upload_photo
+  profile = current_user.worker_profile
 
- def show
+  profile.profile_photo.attach(
+    params[:photo]
+  )
+
+  render json: {
+    message: "Photo uploaded"
+  }
+end
+def upload_certification
+  profile = current_user.worker_profile
+
+  profile.certifications.attach(
+    params[:file]
+  )
+
+  render json: {
+    message: "Certification uploaded"
+  }
+end
+
+def show
   worker = WorkerProfile.find(params[:id])
 
   render json: {
     worker: worker,
     skills: worker.skills,
     reviews: worker.reviews,
-    rating: worker.average_rating
+    rating: worker.average_rating,
+    profile_photo:
+      worker.profile_photo.attached? ?
+      url_for(worker.profile_photo) :
+      nil
   }
 end
 

@@ -3,6 +3,7 @@ class Review < ApplicationRecord
 
   belongs_to :customer,
              class_name: 'User'
+  has_many_attached :images
 
   belongs_to :worker_profile
 

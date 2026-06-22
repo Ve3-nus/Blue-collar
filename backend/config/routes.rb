@@ -38,6 +38,14 @@ patch '/admin/users/:id/activate',
       to: 'admin#activate_user'  
 get '/admin/stats',
     to: 'admin#stats'
+patch '/worker_profiles/upload_photo',
+      to: 'worker_profiles#upload_photo'
+
+patch '/worker_profiles/upload_certification',
+      to: 'worker_profiles#upload_certification'
+patch '/jobs/:id/upload_images',
+      to: 'jobs#upload_images'
+
 
       resources :worker_profiles,
                 only: [
@@ -79,6 +87,10 @@ resources :reviews,
             :index,
             :show
           ]
+          resources :messages, 
+          only: 
+          [:index, 
+          :create]
           
     end
   end

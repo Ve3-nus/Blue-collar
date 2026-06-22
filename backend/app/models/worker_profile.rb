@@ -3,6 +3,8 @@ class WorkerProfile < ApplicationRecord
 
   has_many :worker_skills,
            dependent: :destroy
+  has_one_attached :profile_photo
+  has_many_attached :certifications
 
   has_many :skills,
            through: :worker_skills
