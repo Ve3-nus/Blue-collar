@@ -45,6 +45,16 @@ patch '/worker_profiles/upload_certification',
       to: 'worker_profiles#upload_certification'
 patch '/jobs/:id/upload_images',
       to: 'jobs#upload_images'
+get '/jobs/:id/messages',
+    to: 'messages#index'
+get '/analytics',
+    to: 'analytics#overview'
+get '/analytics/top_skills',
+    to: 'analytics#top_skills'
+get '/analytics/top_workers',
+    to: 'analytics#top_workers'
+get '/analytics/completion_rate',
+    to: 'analytics#completion_rate'
 
 
       resources :worker_profiles,

@@ -15,8 +15,12 @@ class Api::V1::ReviewsController < ApplicationController
     review = Review.new(review_params)
 
     if review.save
-      render json: review,
-             status: :created
+      NotificationService.create(
+        review.worker_profile.user,
+        "You received a new review"
+      )
+
+      render json: review, status: :created
     else
       render json: {
         errors: review.errors.full_messages

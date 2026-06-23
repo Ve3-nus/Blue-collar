@@ -17,4 +17,10 @@ class Api::V1::MessagesController < ApplicationController
 
     render json: message, status: :created
   end
+  def chat_history
+  messages = Message.where(job_id: params[:job_id])
+                     .order(created_at: :asc)
+
+  render json: messages
+end
 end
