@@ -1,46 +1,15 @@
-import {
-  useContext,
-} from "react";
-
-import {
-  AuthContext,
-} from "../context/AuthContext";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import CustomerDashboard from "./Dashboard";
+import WorkerDashboard from "./WorkerDashboard";
+import AdminDashboard from "./AdminDashboard";
 
 export default function Dashboard() {
-
-  const {
-    user,
-    logout,
-  } = useContext(
-    AuthContext
-  );
-
-  return (
-    <div className="p-10">
-
-      <h1 className="text-3xl">
-
-        Welcome
-
-        {" "}
-
-        {user?.first_name}
-
-      </h1>
-
-      <p>
-        Role:
-        {" "}
-        {user?.role}
-      </p>
-
-      <button
-        onClick={logout}
-        className="bg-red-600 text-white px-4 py-2 mt-4"
-      >
-        Logout
-      </button>
-
-    </div>
-  );
+  const { user } = useContext(AuthContext);
+  if (user?.role === "customer") return <CustomerDashboard />;
+  if (user?.role === "worker")   return <WorkerDashboard />;
+  if (user?.role === "admin")    return <AdminDashboard />;
+  return <div className="page-empty">Unknown role.</div>;
 }
+
+

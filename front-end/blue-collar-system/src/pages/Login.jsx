@@ -1,106 +1,96 @@
-import { useState, useContext }
-from "react";
-
-import {
-  useNavigate,
-} from "react-router-dom";
-
-import {
-  AuthContext,
-} from "../context/AuthContext";
-
-import {
-  loginUser,
-  getCurrentUser,
-} from "../api/auth";
+import { useState, useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { loginUser, getCurrentUser } from "../api/auth";
 
 export default function Login() {
+  const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  
 
-  const navigate =
-    useNavigate();
-
-  const { setUser } =
-    useContext(AuthContext);
-
-  const [email, setEmail] =
-    useState("");
-
-  const [password, setPassword] =
-    useState("");
-
-  const handleSubmit =
-    async (e) => {
-
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
+   try {
+  const response = await loginUser({ email, password });
+  console.log(response);
 
-    try {
+  console.log("LOGIN RESPONSE:", response);
 
-      const response =
-        await loginUser({
-          email,
-          password,
-        });
+  localStorage.setItem("token", response.token);
 
-      localStorage.setItem(
-        "token",
-        response.token
-      );
+  const user = await getCurrentUser();
+setUser(user);
 
-      const user =
-        await getCurrentUser();
+  console.log("CURRENT USER:", user);
 
-      setUser(user);
-
-      navigate("/dashboard");
-
-    } catch {
-
-      alert(
-        "Invalid credentials"
-      );
+  setUser(user.data);
+  navigate("/dashboard");
+} catch {
+      setError("Incorrect email or password. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="p-10">
+    <div className="auth-page">
+      <div className="auth-hero">
+        <div className="auth-hero-inner">
+          <div className="auth-logo">⚒</div>
+          <h1 className="auth-headline">WorkMatch</h1>
+          <p className="auth-tagline">Connecting skilled workers with the people who need them.</p>
+        </div>
+      </div>
 
-      <h1 className="text-3xl mb-5">
-        Login
-      </h1>
+      <div className="auth-form-panel">
+        <div className="auth-card">
+          <h2 className="auth-title">Welcome back</h2>
+          <p className="auth-subtitle">Sign in to your account</p>
 
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-3"
-      >
+          {error && <div className="alert alert-error">{error}</div>}
 
-        <input
-          placeholder="Email"
-          className="border p-2 w-full"
-          onChange={(e) =>
-            setEmail(
-              e.target.value
-            )
-          }
-        />
+          <form onSubmit={handleSubmit} className="auth-form">
+            <div className="field">
+              <label className="field-label">Email address</label>
+              <input
+                type="email"
+                className="field-input"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          className="border p-2 w-full"
-          onChange={(e) =>
-            setPassword(
-              e.target.value
-            )
-          }
-        />
+            <div className="field">
+              <label className="field-label">Password</label>
+              <input
+                type="password"
+                className="field-input"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
 
-        <button
-          className="bg-green-600 text-white px-4 py-2"
-        >
-          Login
-        </button>
+            <button className="btn btn-primary btn-full" disabled={loading}>
+              {loading ? "Signing in…" : "Sign in"}
+            </button>
+          </form>
 
-      </form>
+          <p className="auth-footer-text">
+            Don't have an account?{" "}
+            <Link to="/register" className="auth-link">Create one</Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

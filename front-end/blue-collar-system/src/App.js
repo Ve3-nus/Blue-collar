@@ -1,18 +1,45 @@
 import {
   BrowserRouter,
   Routes,
-  Route,
+  Route
 } from "react-router-dom";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+
+import Workers from "./pages/WorkersPage";
+// import WorkerProfile from "./pages/WorkerProfilePage";
+
+import Jobs from "./pages/JobsPage";
+import JobDetails from "./pages/MyJobsPage";
+import CreateJob from "./pages/PostJobPage";
+
+import Skills from "./pages/SkillsPage";
+
+import Applications from "./pages/MyApplicationsPage";
+
+import Notifications from "./pages/NotificationPage";
+
+// import Reviews from "./api/reviews";
+
+// import Messages from "./api/messages";
+
+import Analytics from "./pages/AnalyticsPage";
+
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminUsers from "./pages/AdminUsersPage";
+import AdminJobs from "./pages/AdminJobsPage";
+import AdminReviews from "./pages/AdminReviewsPage";
+
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+
+        {/* PUBLIC */}
 
         <Route
           path="/"
@@ -24,14 +51,169 @@ function App() {
           element={<Register />}
         />
 
-       <Route
-  path="/dashboard"
-  element={
-    <ProtectedRoute>
-      <Dashboard />
-    </ProtectedRoute>
-  }
-/>
+        {/* DASHBOARD */}
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* WORKERS */}
+
+        <Route
+          path="/workers"
+          element={
+            <ProtectedRoute>
+              <Workers />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* <Route
+          path="/workers/:id"
+          element={
+            <ProtectedRoute>
+              <WorkerProfile />
+            </ProtectedRoute>
+          }
+        /> */}
+
+        {/* SKILLS */}
+
+        <Route
+          path="/skills"
+          element={
+            <ProtectedRoute>
+              <Skills />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* JOBS */}
+
+        <Route
+          path="/jobs"
+          element={
+            <ProtectedRoute>
+              <Jobs />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/jobs/create"
+          element={
+            <ProtectedRoute>
+              <CreateJob />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/jobs/:id"
+          element={
+            <ProtectedRoute>
+              <JobDetails />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* APPLICATIONS */}
+
+        <Route
+          path="/applications"
+          element={
+            <ProtectedRoute>
+              <Applications />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* NOTIFICATIONS */}
+
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute>
+              <Notifications />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* REVIEWS */}
+
+        {/* <Route
+          path="/reviews"
+          element={
+            <ProtectedRoute>
+              <Reviews />
+            </ProtectedRoute>
+          }
+        /> */}
+
+        {/* CHAT */}
+
+        {/* <Route
+          path="/messages"
+          element={
+            <ProtectedRoute>
+              <Messages />
+            </ProtectedRoute>
+          }
+        /> */}
+
+        {/* ANALYTICS */}
+
+        <Route
+          path="/analytics"
+          element={
+            <ProtectedRoute>
+              <Analytics />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* ADMIN */}
+
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute>
+              <AdminUsers />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/jobs"
+          element={
+            <ProtectedRoute>
+              <AdminJobs />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/reviews"
+          element={
+            <ProtectedRoute>
+              <AdminReviews />
+            </ProtectedRoute>
+          }
+        />
 
       </Routes>
     </BrowserRouter>
