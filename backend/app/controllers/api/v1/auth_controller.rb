@@ -22,29 +22,17 @@ class Api::V1::AuthController < ApplicationController
   def login
     user = User.find_by(email: params[:email])
 
-    if user&.authenticate(params[:password])
-
-  if user.status == "suspended"
-    return render json: {
-      error: "Account suspended"
-    }, status: :forbidden
-  end
-
-      token = JsonWebToken.encode(
-        user_id: user.id
-      )
+    if user && user.authenticate(params[:password])
+      token = JsonWebToken.encode(user_id: user.id)
 
       render json: {
         token: token,
         user: user
       }
-
     else
-
       render json: {
         error: "Invalid credentials"
       }, status: :unauthorized
-
     end
   end
 

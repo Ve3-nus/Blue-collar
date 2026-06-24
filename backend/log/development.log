@@ -1404,3 +1404,509 @@ Migrating to CreateMessages (20260622112253)
   [1m[35mSQL (0.2ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Backend'*/[0m
   [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO public /*application='Backend'*/[0m
   [1m[35mSQL (0.1ms)[0m  [1m[35mSET search_path TO "$user", public /*application='Backend'*/[0m
+Started GET "/main.6bfb147395ac970eb8f8.hot-update.json" for ::1 at 2026-06-23 12:12:48 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (5.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  
+ActionController::RoutingError (No route matches [GET] "/main.6bfb147395ac970eb8f8.hot-update.json"):
+  
+Started GET "/register" for ::1 at 2026-06-23 12:12:50 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/register"):
+  
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for ::1 at 2026-06-23 12:12:51 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/favicon.ico" for ::1 at 2026-06-23 12:12:51 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/register" for ::1 at 2026-06-23 12:16:20 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/register"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 12:22:51 +0300
+Started GET "/ws" for 127.0.0.1 at 2026-06-23 12:22:51 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 12:22:55 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 12:22:55 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 12:23:00 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for 127.0.0.1 at 2026-06-23 12:23:00 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 12:23:09 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 12:23:09 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 12:23:26 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 12:23:26 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 12:23:59 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 12:23:59 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 12:25:05 +0300
+Started GET "/ws" for 127.0.0.1 at 2026-06-23 12:25:05 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 12:27:17 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for 127.0.0.1 at 2026-06-23 12:27:17 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started POST "/api/v1/register" for ::1 at 2026-06-23 12:27:26 +0300
+Processing by Api::V1::AuthController#register as HTML
+  Parameters: {"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "auth"=>{"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}}
+[31mUnpermitted parameter: :auth. Context: { controller: Api::V1::AuthController, action: register, request: #<ActionDispatch::Request:0x000002e03424f150>, params: {"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "controller"=>"api/v1/auth", "action"=>"register", "auth"=>{"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}} }[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mUser Exists? (17.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 've.k@gmail.com' LIMIT 1 /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[31mROLLBACK /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+Completed 422 Unprocessable Content in 774ms (Views: 2.3ms | ActiveRecord: 110.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/register" for ::1 at 2026-06-23 12:27:41 +0300
+Processing by Api::V1::AuthController#register as HTML
+  Parameters: {"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "auth"=>{"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}}
+[31mUnpermitted parameter: :auth. Context: { controller: Api::V1::AuthController, action: register, request: #<ActionDispatch::Request:0x000002e037274100>, params: {"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "controller"=>"api/v1/auth", "action"=>"register", "auth"=>{"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}} }[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mUser Exists? (4.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 've.k@gmail.com' LIMIT 1 /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+Completed 422 Unprocessable Content in 195ms (Views: 0.1ms | ActiveRecord: 4.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/register" for ::1 at 2026-06-23 12:27:49 +0300
+Processing by Api::V1::AuthController#register as HTML
+  Parameters: {"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "auth"=>{"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}}
+[31mUnpermitted parameter: :auth. Context: { controller: Api::V1::AuthController, action: register, request: #<ActionDispatch::Request:0x000002e036c7e890>, params: {"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "controller"=>"api/v1/auth", "action"=>"register", "auth"=>{"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}} }[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mUser Exists? (4.9ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 've.k@gmail.com' LIMIT 1 /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+Completed 422 Unprocessable Content in 251ms (Views: 0.2ms | ActiveRecord: 5.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ws" for ::1 at 2026-06-23 12:31:34 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for 127.0.0.1 at 2026-06-23 12:31:34 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started POST "/api/v1/register" for ::1 at 2026-06-23 12:35:18 +0300
+Processing by Api::V1::AuthController#register as HTML
+  Parameters: {"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345544", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "auth"=>{"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345544", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}}
+[31mUnpermitted parameter: :auth. Context: { controller: Api::V1::AuthController, action: register, request: #<ActionDispatch::Request:0x000002e0371b5200>, params: {"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345544", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "controller"=>"api/v1/auth", "action"=>"register", "auth"=>{"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"12345544", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}} }[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mUser Exists? (48.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 've.k@gmail.comm' LIMIT 1 /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mUser Create (7.4ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "phone", "password_digest", "role", "status", "created_at", "updated_at") VALUES ('Venus', 'Kabera', 've.k@gmail.comm', '12345544', '$2a$12$wjpJK3KsPmJoqWFrUuPoeuQsbb7ZRsZgN9F3gDx1ER2l5wWqJ6dUu', 'customer', 'active', '2026-06-23 09:35:19.103922', '2026-06-23 09:35:19.103922') RETURNING "id" /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mTRANSACTION (5.8ms)[0m  [1m[35mCOMMIT /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+Completed 201 Created in 1317ms (Views: 7.3ms | ActiveRecord: 113.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for ::1 at 2026-06-23 12:35:45 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 've.k@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 401 Unauthorized in 33ms (Views: 0.2ms | ActiveRecord: 1.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for ::1 at 2026-06-23 12:35:54 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 've.k@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2026-06-23 13:23:17 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (4.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.0ms | GC: 0.0ms)
+Completed 200 OK in 47ms (Views: 11.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/icon.png" for ::1 at 2026-06-23 13:23:18 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/icon.png"):
+  
+Started POST "/api/v1/login" for ::1 at 2026-06-23 13:27:46 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (3.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 've.k@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 401 Unauthorized in 365ms (Views: 3.7ms | ActiveRecord: 67.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/register" for ::1 at 2026-06-23 13:29:21 +0300
+Processing by Api::V1::AuthController#register as HTML
+  Parameters: {"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"123123123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "auth"=>{"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"123123123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}}
+[31mUnpermitted parameter: :auth. Context: { controller: Api::V1::AuthController, action: register, request: #<ActionDispatch::Request:0x000002e0a144c440>, params: {"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"123123123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "controller"=>"api/v1/auth", "action"=>"register", "auth"=>{"first_name"=>"Venus", "last_name"=>"Kabera", "email"=>"[FILTERED]", "phone"=>"123123123", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}} }[0m
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mBEGIN /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mUser Exists? (12.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'venu.k@gmail.com' LIMIT 1 /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mUser Create (8.2ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "phone", "password_digest", "role", "status", "created_at", "updated_at") VALUES ('Venus', 'Kabera', 'venu.k@gmail.com', '123123123', '$2a$12$lHYStBFCMrOe8p6cjIYMU.88HLmYE/WiD3tyxV0CHqaPa8FMSOgKy', 'customer', 'active', '2026-06-23 10:29:21.464647', '2026-06-23 10:29:21.464647') RETURNING "id" /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+Completed 201 Created in 614ms (Views: 3.5ms | ActiveRecord: 75.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for ::1 at 2026-06-23 13:29:39 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'venu.k@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 197ms (Views: 1.3ms | ActiveRecord: 2.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for ::1 at 2026-06-23 13:29:40 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 15ms (Views: 0.8ms | ActiveRecord: 2.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for ::1 at 2026-06-23 13:30:47 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (87.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 3 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 138ms (Views: 2.2ms | ActiveRecord: 87.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/ws" for ::1 at 2026-06-23 13:50:37 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (3.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 13:50:39 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 13:50:41 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 13:50:45 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/ws" for ::1 at 2026-06-23 13:50:54 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/ws"):
+  
+Started GET "/" for ::1 at 2026-06-23 13:51:01 +0300
+Processing by Rails::WelcomeController#index as HTML
+  Rendering C:/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.1.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered C:/Ruby33-x64/lib/ruby/gems/3.3.0/gems/railties-8.1.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.1ms | GC: 0.0ms)
+Completed 200 OK in 17ms (Views: 2.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/webpack-dev-server/open-editor?fileName=C:\Users\vekab\Desktop\Blue-collar\front-end\blue-collar-system\node_modules\babel-loader\lib\index.js??ruleSet[1].rules[1].oneOf[3]!C:\Users\vekab\Desktop\Blue-collar\front-end\blue-collar-system\node_modules\source-map-loader\dist\cjs.js!C:\Users\vekab\Desktop\Blue-collar\front-end\blue-collar-system\src\App.js" for ::1 at 2026-06-24 14:15:58 +0300
+Started GET "/" for ::1 at 2026-06-24 14:15:58 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (4.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+  
+ActionController::RoutingError (No route matches [GET] "/"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/webpack-dev-server/open-editor"):
+  
+Started GET "/favicon.ico" for ::1 at 2026-06-24 14:16:00 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-24 15:12:28 +0300
+Processing by Api::V1::AuthController#me as */*
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 190ms (Views: 148.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/api/v1/register" for 127.0.0.1 at 2026-06-24 15:15:25 +0300
+Processing by Api::V1::AuthController#register as HTML
+  Parameters: {"first_name"=>"john", "last_name"=>"Doe", "email"=>"[FILTERED]", "phone"=>"+2547000990", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "auth"=>{"first_name"=>"john", "last_name"=>"Doe", "email"=>"[FILTERED]", "phone"=>"+2547000990", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}}
+[31mUnpermitted parameter: :auth. Context: { controller: Api::V1::AuthController, action: register, request: #<ActionDispatch::Request:0x000001abcd3a2d00>, params: {"first_name"=>"john", "last_name"=>"Doe", "email"=>"[FILTERED]", "phone"=>"+2547000990", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "controller"=>"api/v1/auth", "action"=>"register", "auth"=>{"first_name"=>"john", "last_name"=>"Doe", "email"=>"[FILTERED]", "phone"=>"+2547000990", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}} }[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mUser Exists? (9.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'John@gmail.com' LIMIT 1 /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mUser Create (7.1ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "phone", "password_digest", "role", "status", "created_at", "updated_at") VALUES ('john', 'Doe', 'John@gmail.com', '+2547000990', '$2a$12$jNK1.NxRJ1o4Y5/I1jAe9ORhiG5AXnb7GwNZuqXmbKRANK6j0BPse', 'customer', 'active', '2026-06-24 12:15:26.265303', '2026-06-24 12:15:26.265303') RETURNING "id" /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+Completed 201 Created in 749ms (Views: 1.6ms | ActiveRecord: 79.3ms (2 queries, 0 cached) | GC: 990.2ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-24 15:15:41 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'John@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 187ms (Views: 1.0ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-24 15:15:41 +0300
+Processing by Api::V1::AuthController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-24 15:16:08 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'John@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 193ms (Views: 0.8ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-24 15:16:08 +0300
+Processing by Api::V1::AuthController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-24 15:20:50 +0300
+Processing by Api::V1::AuthController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 8ms (Views: 2.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-24 15:23:41 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (4.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'john@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 401 Unauthorized in 205ms (Views: 0.6ms | ActiveRecord: 36.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-24 15:25:16 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'john@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'John@gmail.com' LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'John@gmail.com' LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mUser Pluck (1.8ms)[0m  [1m[34mSELECT "users"."email" FROM "users" /*application='Backend'*/[0m
+  [1m[36mUser Count (9.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*application='Backend'*/[0m
+  [1m[36mUser Pluck (0.5ms)[0m  [1m[34mSELECT "users"."email" FROM "users" /*application='Backend'*/[0m
+  [1m[36mUser Load (8.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'John@gmail.com' LIMIT 1 /*application='Backend'*/[0m
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-24 15:34:55 +0300
+  
+ArgumentError (Reported error must be an Exception, got: #<SyntaxError:"C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless\n    else\n    ^~~~\nC:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end'">)
+Caused by: SyntaxError (C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless
+    else
+    ^~~~
+C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end')
+
+Information for: ArgumentError (Reported error must be an Exception, got: #<SyntaxError:"C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless\n    else\n    ^~~~\nC:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end'">):
+  
+activesupport (8.1.3) lib/active_support/error_reporter.rb:235:in `report'
+actionpack (8.1.3) lib/action_dispatch/middleware/executor.rb:36:in `rescue in call'
+actionpack (8.1.3) lib/action_dispatch/middleware/executor.rb:32:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.1.3) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.1.3) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/remote_ip.rb:98:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.6) lib/rack/runtime.rb:24:in `call'
+activesupport (8.1.3) lib/active_support/cache/strategy/local_cache_middleware.rb:30:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.1.3) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.1.3) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/executor.rb:20:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.6) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (3.0.0) lib/rack/cors.rb:102:in `call'
+railties (8.1.3) lib/rails/engine.rb:534:in `call'
+puma (8.0.2) lib/puma/configuration.rb:305:in `call'
+puma (8.0.2) lib/puma/response.rb:79:in `block in handle_request'
+puma (8.0.2) lib/puma/thread_pool.rb:434:in `with_force_shutdown'
+puma (8.0.2) lib/puma/response.rb:78:in `handle_request'
+puma (8.0.2) lib/puma/server.rb:508:in `process_client'
+puma (8.0.2) lib/puma/server.rb:263:in `block in run'
+puma (8.0.2) lib/puma/thread_pool.rb:246:in `block in spawn_thread'
+
+Information for cause: SyntaxError (C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless
+    else
+    ^~~~
+C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end'):
+  
+app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless
+app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end'
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-24 15:34:59 +0300
+  
+ArgumentError (Reported error must be an Exception, got: #<SyntaxError:"C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless\n    else\n    ^~~~\nC:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end'">)
+Caused by: SyntaxError (C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless
+    else
+    ^~~~
+C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end')
+
+Information for: ArgumentError (Reported error must be an Exception, got: #<SyntaxError:"C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless\n    else\n    ^~~~\nC:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end'">):
+  
+activesupport (8.1.3) lib/active_support/error_reporter.rb:235:in `report'
+actionpack (8.1.3) lib/action_dispatch/middleware/executor.rb:36:in `rescue in call'
+actionpack (8.1.3) lib/action_dispatch/middleware/executor.rb:32:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.1.3) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.1.3) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/remote_ip.rb:98:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.6) lib/rack/runtime.rb:24:in `call'
+activesupport (8.1.3) lib/active_support/cache/strategy/local_cache_middleware.rb:30:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.1.3) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.1.3) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/executor.rb:20:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.6) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (3.0.0) lib/rack/cors.rb:102:in `call'
+railties (8.1.3) lib/rails/engine.rb:534:in `call'
+puma (8.0.2) lib/puma/configuration.rb:305:in `call'
+puma (8.0.2) lib/puma/response.rb:79:in `block in handle_request'
+puma (8.0.2) lib/puma/thread_pool.rb:434:in `with_force_shutdown'
+puma (8.0.2) lib/puma/response.rb:78:in `handle_request'
+puma (8.0.2) lib/puma/server.rb:508:in `process_client'
+puma (8.0.2) lib/puma/server.rb:263:in `block in run'
+puma (8.0.2) lib/puma/thread_pool.rb:246:in `block in spawn_thread'
+
+Information for cause: SyntaxError (C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless
+    else
+    ^~~~
+C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end'):
+  
+app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless
+app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end'
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-24 15:35:04 +0300
+  
+ArgumentError (Reported error must be an Exception, got: #<SyntaxError:"C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless\n    else\n    ^~~~\nC:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end'">)
+Caused by: SyntaxError (C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless
+    else
+    ^~~~
+C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end')
+
+Information for: ArgumentError (Reported error must be an Exception, got: #<SyntaxError:"C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless\n    else\n    ^~~~\nC:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end'">):
+  
+activesupport (8.1.3) lib/active_support/error_reporter.rb:235:in `report'
+actionpack (8.1.3) lib/action_dispatch/middleware/executor.rb:36:in `rescue in call'
+actionpack (8.1.3) lib/action_dispatch/middleware/executor.rb:32:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.1.3) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.1.3) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/remote_ip.rb:98:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.6) lib/rack/runtime.rb:24:in `call'
+activesupport (8.1.3) lib/active_support/cache/strategy/local_cache_middleware.rb:30:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.1.3) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.1.3) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/executor.rb:20:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.6) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.1.3) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+rack-cors (3.0.0) lib/rack/cors.rb:102:in `call'
+railties (8.1.3) lib/rails/engine.rb:534:in `call'
+puma (8.0.2) lib/puma/configuration.rb:305:in `call'
+puma (8.0.2) lib/puma/response.rb:79:in `block in handle_request'
+puma (8.0.2) lib/puma/thread_pool.rb:434:in `with_force_shutdown'
+puma (8.0.2) lib/puma/response.rb:78:in `handle_request'
+puma (8.0.2) lib/puma/server.rb:508:in `process_client'
+puma (8.0.2) lib/puma/server.rb:263:in `block in run'
+puma (8.0.2) lib/puma/thread_pool.rb:246:in `block in spawn_thread'
+
+Information for cause: SyntaxError (C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless
+    else
+    ^~~~
+C:/Users/vekab/Desktop/Blue-collar/backend/app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end'):
+  
+app/controllers/api/v1/auth_controller.rb:43: else without rescue is useless
+app/controllers/api/v1/auth_controller.rb:69: syntax error, unexpected `end'
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-24 15:36:31 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'John@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 314ms (Views: 0.7ms | ActiveRecord: 22.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-24 15:36:32 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 4 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 5ms (Views: 0.6ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-24 15:36:45 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'John@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 189ms (Views: 4.9ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-24 15:36:45 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 4 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 5ms (Views: 0.8ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
