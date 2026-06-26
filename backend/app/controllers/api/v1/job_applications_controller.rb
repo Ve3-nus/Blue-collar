@@ -30,8 +30,9 @@ class Api::V1::JobApplicationsController < ApplicationController
     applications = current_user
                      .worker_profile
                      .job_applications
+                     .include(:job)
 
-    render json: applications
+    render json: applications.as_json(include: :job)
   end
 
   def update

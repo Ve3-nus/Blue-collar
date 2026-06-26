@@ -1,157 +1,386 @@
+import { useEffect, useMemo, useState } from "react";
 import "../styles/CustomerDashboard.css";
 
-export default function CustomerDashboard() {
-  const recentJobs = [
-    {
-      id: 1,
-      title: "Kitchen Electrical Repair",
-      worker: "James Mutua",
-      status: "In Progress",
-      location: "Westlands",
-      date: "Today",
-    },
-    {
-      id: 2,
-      title: "Bathroom Plumbing",
-      worker: "Aisha Kamau",
-      status: "Completed",
-      location: "Karen",
-      date: "Yesterday",
-    },
-    {
-      id: 3,
-      title: "House Painting",
-      worker: "Peter Otieno",
-      status: "Pending",
-      location: "Kilimani",
-      date: "2 Days Ago",
-    },
-  ];
+import {
+  getMyJobs,
+  createJob,
+  getJobMatches,
+} from "../api/jobs";
 
-  const workers = [
-    {
-      id: 1,
-      name: "James Mutua",
-      skill: "Electrician",
-      rating: "4.9",
-    },
-    {
-      id: 2,
-      name: "Aisha Kamau",
-      skill: "Plumber",
-      rating: "4.8",
-    },
-    {
-      id: 3,
-      name: "Peter Otieno",
-      skill: "Painter",
-      rating: "4.7",
-    },
-    {
-      id: 4,
-      name: "Mary Wanjiku",
-      skill: "Carpenter",
-      rating: "4.9",
-    },
-  ];
+import {
+  getWorkers,
+} from "../api/workers";
+export default function CustomerDashboard() {
+
+  const [jobs, setJobs] = useState([]);
+
+  const [workers, setWorkers] = useState([]);
+
+  const [search, setSearch] = useState("");
+
+  const [loading, setLoading] = useState(true);
+
+  const [showForm, setShowForm] = useState(false);
+
+  const [form, setForm] = useState({
+    title: "",
+    description: "",
+    location: "",
+    skill_required: "",
+    budget: "",
+  });
+
+  const [matchedWorkers, setMatchedWorkers] = useState([]);
+    useEffect(() => {
+    loadDashboard();
+  }, []);
+
+  const loadDashboard = async () => {
+
+    try {
+
+      const jobData = await getMyJobs();
+
+      const workerData = await getWorkers();
+
+      setJobs(jobData);
+
+      setWorkers(workerData);
+
+    } catch (err) {
+
+      console.log(err);
+
+    } finally {
+
+      setLoading(false);
+
+    }
+
+  };
+    const stats = useMemo(() => {
+
+    return {
+
+      total: jobs.length,
+
+      open: jobs.filter(j => j.status === "open").length,
+
+      completed: jobs.filter(j => j.status === "completed").length,
+
+      pending: jobs.filter(j => j.status === "pending").length,
+
+    };
+
+  }, [jobs]);  const filteredWorkers = workers.filter(worker => {
+
+    const name = `${worker.first_name || ""} ${worker.last_name || ""}`;
+
+    return (
+
+      name.toLowerCase().includes(search.toLowerCase()) ||
+
+      (worker.skill || "")
+        .toLowerCase()
+        .includes(search.toLowerCase())
+
+    );
+
+  });  const handleChange = (e) => {
+
+    setForm({
+
+      ...form,
+
+      [e.target.name]: e.target.value,
+
+    });
+
+  };  const handleSubmit = async (e) => {
+
+    e.preventDefault();
+
+    try {
+
+      await createJob(form);
+
+      alert("Job posted successfully.");
+
+      setForm({
+
+        title: "",
+
+        description: "",
+
+        location: "",
+
+        skill_required: "",
+
+        budget: "",
+
+      });
+
+      setShowForm(false);
+
+      loadDashboard();
+
+    } catch (err) {
+
+      console.log(err);
+
+      alert("Failed to create job.");
+
+    }
+
+  };   if (loading) {
+    return (
+      <div className="customer-dashboard">
+        <h2>Loading dashboard...</h2>
+      </div>
+    );
+  }
 
   return (
     <div className="customer-dashboard">
 
+      {/* Header */}
+
       <div className="dashboard-header">
         <div>
           <h1>Customer Dashboard</h1>
-          <p>Welcome back. Manage your jobs and hire trusted workers.</p>
+          <p>Manage your jobs and hire skilled workers.</p>
         </div>
 
-        <button className="post-job-btn">
-          + Post New Job
+        <button
+          className="post-job-btn"
+          onClick={() => setShowForm(!showForm)}
+        >
+          {showForm ? "Close Form" : "+ Post New Job"}
         </button>
       </div>
 
-      <div className="stats">
+      {/* Statistics */}
+
+      <div className="stats-grid">
 
         <div className="stat-card">
-          <h3>Jobs Posted</h3>
-          <h2>12</h2>
+          <h2>{stats.total}</h2>
+          <span>Total Jobs</span>
         </div>
 
         <div className="stat-card">
-          <h3>In Progress</h3>
-          <h2>3</h2>
+          <h2>{stats.open}</h2>
+          <span>Open Jobs</span>
         </div>
 
         <div className="stat-card">
-          <h3>Completed</h3>
-          <h2>9</h2>
+          <h2>{stats.pending}</h2>
+          <span>Pending</span>
         </div>
 
         <div className="stat-card">
-          <h3>Favourite Workers</h3>
-          <h2>6</h2>
+          <h2>{stats.completed}</h2>
+          <span>Completed</span>
         </div>
 
       </div>
 
-      <div className="dashboard-content">
+      {/* Post Job Form */}
 
-        <div className="jobs-section">
+      {showForm && (
 
-          <h2>Recent Jobs</h2>
+        <div className="job-form-card">
 
-          {recentJobs.map((job) => (
+          <h2>Create New Job</h2>
 
-            <div className="job-card" key={job.id}>
+          <form onSubmit={handleSubmit}>
 
-              <div>
+            <input
+              type="text"
+              name="title"
+              placeholder="Job Title"
+              value={form.title}
+              onChange={handleChange}
+              required
+            />
+
+            <textarea
+              name="description"
+              placeholder="Job Description"
+              value={form.description}
+              onChange={handleChange}
+              required
+            />
+
+            <input
+              type="text"
+              name="location"
+              placeholder="Location"
+              value={form.location}
+              onChange={handleChange}
+              required
+            />
+
+            <input
+              type="text"
+              name="skill_required"
+              placeholder="Required Skill"
+              value={form.skill_required}
+              onChange={handleChange}
+              required
+            />
+
+            <input
+              type="number"
+              name="budget"
+              placeholder="Budget"
+              value={form.budget}
+              onChange={handleChange}
+              required
+            />
+
+            <button type="submit">
+              Post Job
+            </button>
+
+          </form>
+
+        </div>
+
+      )}
+
+      {/* My Jobs */}
+
+      <div className="section">
+
+        <h2>My Jobs</h2>
+
+        {jobs.length === 0 ? (
+
+          <div className="empty-card">
+            You haven't posted any jobs yet.
+          </div>
+
+        ) : (
+
+          jobs.map(job => (
+
+            <div
+              key={job.id}
+              className="job-card"
+            >
+
+              <div className="job-info">
+
                 <h3>{job.title}</h3>
 
+                <p>{job.description}</p>
+
                 <p>
-                  {job.worker}
+                  <strong>Location:</strong> {job.location}
                 </p>
 
-                <small>
-                  {job.location} • {job.date}
-                </small>
+                <p>
+                  <strong>Skill:</strong> {job.skill_required}
+                </p>
+
+                <p>
+                  <strong>Budget:</strong> KES {job.budget}
+                </p>
+
+                <span className={`status ${job.status}`}>
+                  {job.status}
+                </span>
+
               </div>
 
-              <span
-                className={`status ${job.status
-                  .replace(" ", "")
-                  .toLowerCase()}`}
-              >
-                {job.status}
-              </span>
+              <div className="job-actions">
+
+                <button>
+                  View Details
+                </button>
+
+                <button
+                  onClick={async () => {
+
+                    const workers =
+                      await getJobMatches(job.id);
+
+                    setMatchedWorkers(workers);
+
+                  }}
+                >
+                  Find Workers
+                </button>
+
+              </div>
 
             </div>
 
-          ))}
+          ))
+
+        )}
+
+      </div>
+
+      {/* Search */}
+
+      <div className="section">
+
+        <div className="search-box">
+
+          <input
+            type="text"
+            placeholder="Search workers..."
+            value={search}
+            onChange={(e) =>
+              setSearch(e.target.value)
+            }
+          />
 
         </div>
 
-        <div className="workers-section">
+      </div>
 
-          <h2>Recommended Workers</h2>
+      {/* Recommended Workers */}
 
-          {workers.map((worker) => (
+      <div className="section">
 
-            <div className="worker-card" key={worker.id}>
+        <h2>Recommended Workers</h2>
+
+        <div className="workers-grid">
+
+          {filteredWorkers.map(worker => (
+
+            <div
+              key={worker.id}
+              className="worker-card"
+            >
 
               <div className="avatar">
-                {worker.name.charAt(0)}
-              </div>
 
-              <div>
-
-                <h4>{worker.name}</h4>
-
-                <p>{worker.skill}</p>
-
-                <small>⭐ {worker.rating}</small>
+                {worker.first_name?.charAt(0)}
+                {worker.last_name?.charAt(0)}
 
               </div>
 
-              <button>View</button>
+              <h3>
+
+                {worker.first_name} {worker.last_name}
+
+              </h3>
+
+              <p>
+
+                {worker.skill}
+
+              </p>
+
+              <button>
+
+                View Profile
+
+              </button>
 
             </div>
 
@@ -160,7 +389,60 @@ export default function CustomerDashboard() {
         </div>
 
       </div>
+
+      {/* Matching Workers */}
+
+      {matchedWorkers.length > 0 && (
+
+        <div className="section">
+
+          <h2>Matching Workers</h2>
+
+          <div className="workers-grid">
+
+            {matchedWorkers.map(worker => (
+
+              <div
+                key={worker.id}
+                className="worker-card"
+              >
+
+                <div className="avatar">
+
+                  {worker.first_name?.charAt(0)}
+                  {worker.last_name?.charAt(0)}
+
+                </div>
+
+                <h3>
+
+                  {worker.first_name} {worker.last_name}
+
+                </h3>
+
+                <p>
+
+                  {worker.skill}
+
+                </p>
+
+                <button>
+
+                  Hire Worker
+
+                </button>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </div>
+
+      )}
 
     </div>
   );
+
 }

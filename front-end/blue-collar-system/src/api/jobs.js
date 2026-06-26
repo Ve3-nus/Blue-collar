@@ -1,28 +1,25 @@
-import api from "./axios";
+import api from "../api/axios";
 
-export const getJobs = () =>
-  api.get("/jobs");
+export const getJobs = async () => {
+  const response = await api.get("/jobs");
+  return response.data;
+};
 
-export const getJob = (id) =>
-  api.get(`/jobs/${id}`);
+export const getMyJobs = async () => {
+  const response = await api.get("/my_jobs");
+  return response.data;
+};
 
-export const createJob = (data) =>
-  api.post("/jobs", data);
+export const createJob = async (data) => {
+  const response = await api.post("/jobs", data);
+  return response.data;
+};
+export const getJobMatches = async (id) => {
+  const response = await api.get(`/jobs/${id}/matches`);
+  return response.data;
+};
 
-export const getMyJobs = () =>
-  api.get("/my_jobs");
-
-export const getApplicants = (jobId) =>
-  api.get(`/jobs/${jobId}/applicants`);
-
-export const getJobMatches = (jobId) =>
-  api.get(`/jobs/${jobId}/matches`);
-
-export const uploadJobImages = (
-  jobId,
-  formData
-) =>
-  api.patch(
-    `/jobs/${jobId}/upload_images`,
-    formData
-  );
+export const getJob = async (id) => {
+  const response = await api.get(`/jobs/${id}`);
+  return response.data;
+};

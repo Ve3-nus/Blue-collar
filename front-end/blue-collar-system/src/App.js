@@ -15,6 +15,9 @@ import Skills from "./pages/SkillsPage";
 import Applications from "./pages/MyApplicationsPage";
 
 import Notifications from "./pages/NotificationPage";
+import MyJobsPage from "./pages/MyJobsPage";
+import PostJobPage from "./pages/PostJobPage";
+import ApplicantsPage from "./pages/ApplicantPage";
 
 // import Reviews from "./api/reviews";
 
@@ -25,6 +28,7 @@ import Analytics from "./pages/AnalyticsPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminUsers from "./pages/AdminUsersPage";
 import AdminJobs from "./pages/AdminJobsPage";
+import WorkerProfilePage from "./pages/WorkerProfilePage";
 import AdminReviews from "./pages/AdminReviewsPage";
 
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -48,6 +52,14 @@ function App() {
         />
 
         {/* DASHBOARD */}
+        <Route
+  path="/worker-profile"
+  element={
+    <ProtectedRoute>
+      <WorkerProfilePage />
+    </ProtectedRoute>
+  }
+/>
 
         <Route
           path="/dashboard"
@@ -57,6 +69,14 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/jobs/:id/applicants"
+  element={
+    <ProtectedRoute>
+      <ApplicantsPage />
+    </ProtectedRoute>
+  }
+/>
 
         {/* WORKERS */}
 
@@ -210,6 +230,23 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/my-jobs"
+  element={
+    <ProtectedRoute>
+      <MyJobsPage />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/jobs/create"
+  element={
+    <ProtectedRoute>
+      <PostJobPage />
+    </ProtectedRoute>
+  }
+/>
 
       </Routes>
     </BrowserRouter>

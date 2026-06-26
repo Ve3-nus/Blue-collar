@@ -1,0 +1,175 @@
+.applicants-page{
+
+    padding:40px;
+
+    background:#f4f7fb;
+
+    min-height:100vh;
+
+}
+
+.applicants-page h1{
+
+    margin-bottom:30px;
+
+    color:#1e3a8a;
+
+}
+
+.loading{
+
+    padding:80px;
+
+    text-align:center;
+
+    font-size:22px;
+
+}
+
+.empty{
+
+    background:white;
+
+    padding:50px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+}
+
+.applicants-grid{
+
+    display:grid;
+
+    gap:20px;
+
+}
+
+.applicant-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.avatar{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+    font-weight:bold;
+
+}
+
+.info{
+
+    flex:1;
+
+    margin-left:25px;
+
+}
+
+.info h2{
+
+    margin-bottom:10px;
+
+}
+
+.info p{
+
+    color:#666;
+
+    margin:4px 0;
+
+}
+
+.actions{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+.accept-btn{
+
+    background:#16a34a;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+.reject-btn{
+
+    background:#dc2626;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+.status{
+
+    padding:10px 20px;
+
+    border-radius:20px;
+
+    color:white;
+
+    text-transform:capitalize;
+
+}
+
+.status.accepted{
+
+    background:#16a34a;
+
+}
+
+.status.rejected{
+
+    background:#dc2626;
+
+}
