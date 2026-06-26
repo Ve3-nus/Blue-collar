@@ -1,16 +1,11 @@
 import {
-  BrowserRouter,
-  Routes,
-  Route
-} from "react-router-dom";
-
+  BrowserRouter,Routes,Route} from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 
 import Workers from "./pages/WorkersPage";
 // import WorkerProfile from "./pages/WorkerProfilePage";
-
 import Jobs from "./pages/JobsPage";
 import JobDetails from "./pages/MyJobsPage";
 import CreateJob from "./pages/PostJobPage";
@@ -33,6 +28,7 @@ import AdminJobs from "./pages/AdminJobsPage";
 import AdminReviews from "./pages/AdminReviewsPage";
 
 import ProtectedRoute from "./components/ProtectedRoute";
+import "./pages/App.css";
 
 function App() {
   return (

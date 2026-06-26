@@ -1,55 +1,22 @@
-import {
-  createContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useState } from "react";
 
-import { getCurrentUser } from "../api/auth";
+export const AuthContext = createContext();
 
-export const AuthContext =
-  createContext();
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
 
-export const AuthProvider = ({
-  children,
-}) => {
-
-  const [user, setUser] =
-    useState(null);
-
-  const [loading, setLoading] =
-    useState(true);
-
-  useEffect(() => {
-    const loadUser = async () => {
-
-      const token =
-        localStorage.getItem("token");
-
-      if (!token) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const user =
-          await getCurrentUser();
-
-        setUser(user);
-
-      } catch {
-        localStorage.removeItem(
-          "token"
-        );
-      }
-
-      setLoading(false);
-    };
-
-    loadUser();
-  }, []);
+  const login = (userData, token) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(userData));
+    setUser(userData);
+  };
 
   const logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setUser(null);
   };
 
@@ -58,8 +25,8 @@ export const AuthProvider = ({
       value={{
         user,
         setUser,
+        login,
         logout,
-        loading,
       }}
     >
       {children}

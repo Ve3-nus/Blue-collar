@@ -1910,3 +1910,161 @@ Processing by Api::V1::AuthController#me as HTML
 Completed 200 OK in 5ms (Views: 0.8ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
 
 
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-26 12:51:51 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (3.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by Api::V1::AuthController#me as HTML
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 9ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-26 13:08:03 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (3.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'john@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 401 Unauthorized in 848ms (Views: 105.2ms | ActiveRecord: 50.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-26 13:08:37 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'john@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/register" for 127.0.0.1 at 2026-06-26 13:09:37 +0300
+Processing by Api::V1::AuthController#register as HTML
+  Parameters: {"first_name"=>"jane", "last_name"=>"doe", "email"=>"[FILTERED]", "phone"=>"07898989", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "auth"=>{"first_name"=>"jane", "last_name"=>"doe", "email"=>"[FILTERED]", "phone"=>"07898989", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}}
+[31mUnpermitted parameter: :auth. Context: { controller: Api::V1::AuthController, action: register, request: #<ActionDispatch::Request:0x0000026fc7dd1b00>, params: {"first_name"=>"jane", "last_name"=>"doe", "email"=>"[FILTERED]", "phone"=>"07898989", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer", "controller"=>"api/v1/auth", "action"=>"register", "auth"=>{"first_name"=>"jane", "last_name"=>"doe", "email"=>"[FILTERED]", "phone"=>"07898989", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "role"=>"customer"}} }[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mUser Exists? (6.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'jane@gmail.com' LIMIT 1 /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mUser Create (7.8ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "phone", "password_digest", "role", "status", "created_at", "updated_at") VALUES ('jane', 'doe', 'jane@gmail.com', '07898989', '$2a$12$v5CzGGkzGpsO86Tl/TiFG.zKpRWM7HSGoLLPojHWnp9Vfn2dbqk1O', 'customer', 'active', '2026-06-26 10:09:37.602774', '2026-06-26 10:09:37.602774') RETURNING "id" /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT /*action='register',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:8:in `register'
+Completed 201 Created in 344ms (Views: 1.5ms | ActiveRecord: 28.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-26 13:09:49 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'jane@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 208ms (Views: 1.7ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-26 13:09:49 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 10ms (Views: 0.5ms | ActiveRecord: 2.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-26 13:34:53 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (147.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 271ms (Views: 11.4ms | ActiveRecord: 175.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-26 13:34:55 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 4ms (Views: 0.6ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-26 13:34:55 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 4ms (Views: 0.6ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-26 13:35:59 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'jane@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 230ms (Views: 0.6ms | ActiveRecord: 2.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-26 13:35:59 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 6ms (Views: 0.7ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-26 13:36:02 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'jane@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 250ms (Views: 0.6ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-26 13:36:02 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 7ms (Views: 0.8ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-26 13:37:25 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 9ms (Views: 1.3ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-26 13:37:58 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 10ms (Views: 0.9ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-26 13:38:12 +0300
+Processing by Api::V1::AuthController#login as HTML
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'jane@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 211ms (Views: 1.0ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-26 13:38:12 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 7ms (Views: 0.5ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/dashboard" for ::1 at 2026-06-26 13:42:41 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/dashboard"):
+  
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-26 13:45:34 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (187.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 297ms (Views: 36.1ms | ActiveRecord: 225.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-26 13:45:36 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 7ms (Views: 1.2ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-26 13:45:37 +0300
+Processing by Api::V1::AuthController#me as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 5ms (Views: 0.7ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
