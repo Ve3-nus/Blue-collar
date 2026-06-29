@@ -13,6 +13,24 @@ class Api::V1::WorkerProfilesController < ApplicationController
 
   render json: workers
 end
+def my_profile
+  profile = current_user.worker_profile ||
+            current_user.create_worker_profile(
+              bio: "", location: "", experience_years: 0, hourly_rate: 0
+            )
+
+  render json: {
+    id: profile.id,
+    bio: profile.bio,
+    location: profile.location,
+    experience_years: profile.experience_years,
+    hourly_rate: profile.hourly_rate,
+    average_rating: profile.average_rating,   # add this
+    reviews_count: profile.reviews.count,     # add this
+    photo_url: profile.profile_photo.attached? ?
+      url_for(profile.profile_photo) : nil
+  }
+end
   def create
     profile = current_user.create_worker_profile(
       worker_profile_params

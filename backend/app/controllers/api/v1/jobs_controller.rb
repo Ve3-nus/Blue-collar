@@ -43,8 +43,7 @@ def upload_images
 end
   def create
     job = current_user.jobs.build(
-      job_params.merge(
-        status: "open"
+      job_params.merge(status: "open"
       )
     )
 
@@ -65,7 +64,7 @@ end
       :title,
       :description,
       :location,
-      :skill_required,
+      :skills_required,
       :budget
     )
   end

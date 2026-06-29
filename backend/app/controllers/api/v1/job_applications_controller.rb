@@ -2,9 +2,16 @@ class Api::V1::JobApplicationsController < ApplicationController
   before_action :authorize_request
 
   def create
+    profile = current_user.worker_profile
+
+    unless profile
+      return render json: { error: "Worker profile not found. Please complete your profile first." },
+                    status: :unprocessable_entity
+    end
+
     application = JobApplication.new(
       job_id: params[:job_id],
-      worker_profile_id: current_user.worker_profile.id,
+      worker_profile_id: profile.id,
       status: "pending"
     )
 
@@ -27,30 +34,39 @@ class Api::V1::JobApplicationsController < ApplicationController
   end
 
   def my_applications
-    applications = current_user
-                     .worker_profile
+    profile = current_user.worker_profile
+
+    # Return empty array instead of 500 when no profile exists yet
+    unless profile
+      return render json: []
+    end
+
+    applications = profile
                      .job_applications
-                     .include(:job)
+                     .includes(:job)   # was .include — typo causing NoMethodError
+                     .order(created_at: :desc)
 
     render json: applications.as_json(include: :job)
   end
 
-  def update
-    application = JobApplication.find(params[:id])
+ def update
+  application = JobApplication.find(params[:id])
 
-    if application.update(status: params[:status])
-      if params[:status] == "accepted"
-        NotificationService.create(
-          application.worker_profile.user,
-          "Your application was accepted"
-        )
-      end
+  if application.update(status: params[:status])
+    if params[:status] == "accepted"
+      application.job.update(status: "closed")  # ← add this
 
-      render json: application
-    else
-      render json: {
-        errors: application.errors.full_messages
-      }, status: :unprocessable_entity
+      NotificationService.create(
+        application.worker_profile.user,
+        "Your application was accepted"
+      )
     end
+
+    render json: application
+  else
+    render json: {
+      errors: application.errors.full_messages
+    }, status: :unprocessable_entity
   end
+end
 end

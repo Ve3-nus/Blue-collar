@@ -1,8 +1,4 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import {BrowserRouter,Routes,Route,} from "react-router-dom";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -23,6 +19,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminUsers from "./pages/AdminUsersPage";
 import AdminJobs from "./pages/AdminJobsPage";
 import AdminReviews from "./pages/AdminReviewsPage";
+import JobDetailPage from "./pages/JobDetailPage";
 
 import Layout from "./pages/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -34,9 +31,7 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        {/* ================= PUBLIC ROUTES ================= */}
-
-        <Route path="/" element={<Login />} />
+       <Route path="/" element={<Login />} />
 
         <Route path="/register" element={<Register />} />
 
@@ -81,10 +76,7 @@ function App() {
             element={<PostJobPage />}
           />
 
-          <Route
-            path="/my-jobs"
-            element={<MyJobsPage />}
-          />
+         <Route path="/jobs/:id" element={<JobDetailPage />} />
 
           <Route
             path="/jobs/:id"

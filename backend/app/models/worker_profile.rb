@@ -1,21 +1,14 @@
 class WorkerProfile < ApplicationRecord
   belongs_to :user
 
-  has_many :worker_skills,
-           dependent: :destroy
+  has_many :worker_skills, dependent: :destroy
   has_one_attached :profile_photo
   has_many_attached :certifications
 
-  has_many :skills,
-           through: :worker_skills
-  
-  has_many :job_applications,
-         dependent: :destroy
-
-  has_many :availabilities,
-           dependent: :destroy
-  has_many :reviews,
-         dependent: :destroy
+  has_many :skills, through: :worker_skills
+  has_many :job_applications, dependent: :destroy
+  # has_many :availabilities, dependent: :destroy  ← comment this out
+  has_many :reviews, dependent: :destroy
 
   validates :location,
             presence: true

@@ -30,6 +30,8 @@ get '/admin/jobs',
 get '/admin/applications',
     to: 'admin#applications'
 
+get "/my_profile", to: "worker_profiles#my_profile"
+
 get '/admin/reviews',
     to: 'admin#reviews'
 patch '/admin/users/:id/suspend',

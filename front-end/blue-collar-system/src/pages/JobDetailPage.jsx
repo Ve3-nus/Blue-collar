@@ -18,23 +18,23 @@ export default function JobDetailPage() {
   const [applying, setApplying] = useState(false);
   const [applied, setApplied] = useState(false);
 
-  useEffect(() => {
-    getJob(id).then((r) => setJob(r.data)).catch(() => {});
-    if (user?.role === "customer") {
-      getApplicants(id).then((r) => setApplicants(r.data || [])).catch(() => {});
-      getJobMatches(id).then((r) => setMatches(r.data || [])).catch(() => {});
-    }
-    getMessages(id).then((r) => setMessages(r.data || [])).catch(() => {});
-  }, [id, user]);
+useEffect(() => {
+  getJob(id).then((data) => setJob(data)).catch(() => {});  // was r.data
+  if (user?.role === "customer") {
+    getApplicants(id).then((data) => setApplicants(data || [])).catch(() => {});
+    getJobMatches(id).then((data) => setMatches(data || [])).catch(() => {});
+  }
+  getMessages(id).then((data) => setMessages(data || [])).catch(() => {});
+}, [id, user]);
 
-  const handleApply = async () => {
-    setApplying(true);
-    try {
-      await applyToJob({ job_id: id });
-      setApplied(true);
-    } catch { /* already applied or error */ }
-    setApplying(false);
-  };
+const handleApply = async () => {
+  setApplying(true);
+  try {
+    await applyToJob(id);   // was applyToJob({ job_id: id })
+    setApplied(true);
+  } catch {}
+  setApplying(false);
+};
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -62,11 +62,17 @@ export default function JobDetailPage() {
             {job.budget && <span>💰 KES {job.budget}</span>}
           </div>
         </div>
-        {user?.role === "worker" && !applied && (
-          <button className="btn btn-primary" onClick={handleApply} disabled={applying}>
-            {applying ? "Applying…" : "Apply Now"}
-          </button>
-        )}
+       {user?.role === "worker" && (
+  job.status === "closed" ? (
+    <span className="badge badge-red">Position Filled</span>
+  ) : applied ? (
+    <span className="badge badge-green">Applied ✓</span>
+  ) : (
+    <button className="btn btn-primary" onClick={handleApply} disabled={applying}>
+      {applying ? "Applying…" : "Apply Now"}
+    </button>
+  )
+)}
         {applied && <span className="badge badge-green">Applied ✓</span>}
       </div>
 

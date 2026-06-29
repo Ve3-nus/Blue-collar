@@ -8,14 +8,14 @@ const NAV_LINKS = {
     { to: "/dashboard", label: "Home" },
     { to: "/jobs", label: "Browse Jobs" },
     { to: "/my-jobs", label: "My Jobs" },
-    { to: "/my-applications", label: "Applications" },
+    { to: "/applications", label: "Applications" },
     { to: "/notifications", label: "Notifications" },
   ],
   worker: [
     { to: "/dashboard", label: "Home" },
     { to: "/jobs", label: "Browse Jobs" },
-    { to: "/my-applications", label: "My Applications" },
-    { to: "/profile", label: "My Profile" },
+    { to: "/applications", label: "My Applications" },
+    { to: "/worker-profile", label: "My Profile" },
     { to: "/notifications", label: "Notifications" },
   ],
   admin: [

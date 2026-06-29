@@ -3,21 +3,33 @@ class Api::V1::AuthController < ApplicationController
   before_action :authorize_request, only: [:me]
 
   def register
-    user = User.new(user_params)
+  user = User.new(user_params)
 
-    if user.save
-      token = JsonWebToken.encode(user_id: user.id)
-
-      render json: {
-        token: token,
-        user: user
-      }, status: :created
-    else
-      render json: {
-        errors: user.errors.full_messages
-      }, status: :unprocessable_entity
+  if user.save
+    if user.role == "worker"
+      user.create_worker_profile(
+        bio: "",
+        location: "",
+        experience_years: 0,
+        hourly_rate: 0
+      )
     end
+
+    token = JsonWebToken.encode(user_id: user.id)
+
+    render json: {
+      token: token,
+      user: user
+    }, status: :created
+
+  else
+
+    render json: {
+      errors: user.errors.full_messages
+    }, status: :unprocessable_entity
+
   end
+end
 
   def login
     user = User.find_by(email: params[:email])

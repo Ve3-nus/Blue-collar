@@ -1,9 +1,13 @@
 import api from "./axios";
-
-export const getWorkerProfile = async (id) => {
-  const response = await api.get(`/worker_profiles/${id}`);
-  return response.data;
+export const getMyProfile = async () => {
+    const response = await api.get("/my_profile");
+    return response.data;
 };
+
+// export const getWorkerProfile = async (id) => {
+//     const response = await api.get(`/worker_profiles/${id}`);
+//     return response.data;
+// };
 
 export const updateWorkerProfile = async (id, data) => {
   const response = await api.put(`/worker_profiles/${id}`, data);

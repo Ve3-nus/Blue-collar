@@ -1,21 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { getJobs } from "../api/jobs";
 import StatusBadge from "../components/StatusBadge";
+import { AuthContext } from "../context/AuthContext";   // add this
 
 export default function JobsPage() {
+  const { user } = useContext(AuthContext);              // add this
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    getJobs()
-      .then((r) => setJobs(r.data || []))
-      .catch(() => {})
-      .finally(() => setLoading(false));
-  }, []);
+useEffect(() => {
+  getJobs()
+    .then((data) => setJobs(data || []))  // data is the array directly
+    .catch(() => {})
+    .finally(() => setLoading(false));
+console.log("Filtered jobs:", filtered);
+}, []);
 
-  const filtered = jobs.filter((j) =>
+const filtered = jobs
+  .filter((j) => {
+    if (user?.role === "worker") return j.status === "open";
+    return true;  // customers and admins see everything
+  })
+  .filter((j) =>
     j.title?.toLowerCase().includes(search.toLowerCase()) ||
     j.location?.toLowerCase().includes(search.toLowerCase())
   );
@@ -27,7 +35,12 @@ export default function JobsPage() {
           <h1 className="page-title">Browse Jobs</h1>
           <p className="page-subtitle">{jobs.length} jobs available on the platform</p>
         </div>
-        <Link to="/jobs/new" className="btn btn-primary">+ Post a Job</Link>
+
+        {/* Only customers see this button */}
+        {user?.role === "customer" && (
+          // JobsPage.jsx — fix the Link
+<Link to="/jobs/create" className="btn btn-primary">+ Post a Job</Link>
+        )}
       </div>
 
       <div className="search-bar">

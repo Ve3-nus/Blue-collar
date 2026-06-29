@@ -4,11 +4,11 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 import {
-  getWorkerProfile,
+  getMyProfile,
   updateWorkerProfile,
   uploadPhoto,
   uploadCertification,
-  getRating,
+ 
 } from "../api/workerProfile";
 
 import "../styles/WorkerProfilePage.css";
@@ -16,6 +16,7 @@ import "../styles/WorkerProfilePage.css";
 export default function WorkerProfilePage() {
 
   const { user } = useContext(AuthContext);
+  console.log(user);
 
   const [profile, setProfile] = useState(null);
 
@@ -29,30 +30,16 @@ export default function WorkerProfilePage() {
 
   }, []);
 
-  const loadProfile = async () => {
-
-    try {
-
-      const data = await getWorkerProfile(
-        user.worker_profile_id
-      );
-
-      setProfile(data);
-
-      const rate = await getRating(
-        user.worker_profile_id
-      );
-
-      setRating(rate.rating);
-
-    } catch (err) {
-
-      console.log(err);
-
-    }
-
-  };
-
+const loadProfile = async () => {
+  try {
+    const data = await getMyProfile();
+    console.log("My Profile:", data);
+    setProfile(data);
+    setRating(data.average_rating); // ← this line replaces the getRating call
+  } catch (err) {
+    console.log(err);
+  }
+};
   const save = async () => {
 
     try {
@@ -119,10 +106,10 @@ export default function WorkerProfilePage() {
         <div className="profile-header">
 
           <img
-            src={profile.photo_url}
-            alt=""
-            className="profile-photo"
-          />
+  src={profile.photo_url || "/default-avatar.png"}
+  alt="Profile"
+  className="profile-photo"
+/>
 
           <div>
 
@@ -143,16 +130,10 @@ export default function WorkerProfilePage() {
         </div>
 
         <label>Bio</label>
-
-        <textarea
-          value={profile.bio || ""}
-          onChange={(e)=>
-            setProfile({
-              ...profile,
-              bio:e.target.value
-            })
-          }
-        />
+<textarea
+  value={profile.bio || ""}
+  onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+/>
 
         <label>Skill</label>
 
@@ -166,17 +147,11 @@ export default function WorkerProfilePage() {
           }
         />
 
-        <label>Experience</label>
-
-        <input
-          value={profile.experience || ""}
-          onChange={(e)=>
-            setProfile({
-              ...profile,
-              experience:e.target.value
-            })
-          }
-        />
+       <label>Experience</label>
+<input
+  value={profile.experience_years || ""}
+  onChange={(e) => setProfile({ ...profile, experience_years: e.target.value })}
+/>
 
         <label>Location</label>
 
