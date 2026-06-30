@@ -19,7 +19,16 @@ end
   end
 
   def applications
-    render json: JobApplication.all
+    applications = JobApplication.includes(job: :customer, worker_profile: :user)
+
+    render json: applications.as_json(
+      include: {
+        job: { only: [:id, :title, :location, :status] },
+        worker_profile: {
+          include: { user: { only: [:id, :first_name, :last_name] } }
+        }
+      }
+    )
   end
 def activate_user
   user = User.find(params[:id])

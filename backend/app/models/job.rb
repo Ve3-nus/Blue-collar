@@ -23,14 +23,16 @@ class Job < ApplicationRecord
 
   validates :status,
             presence: true
-            validates :status,
-          inclusion: {
-            in: %w[
-              open
-              accepted
-              in_progress
-              completed
-              cancelled
-            ]
-          }
+
+  validates :status,
+            inclusion: {
+              in: %w[
+                open
+                accepted
+                in_progress
+                completed
+                cancelled
+                closed
+              ]
+            }
 end

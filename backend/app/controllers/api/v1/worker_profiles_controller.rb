@@ -16,7 +16,7 @@ end
 def my_profile
   profile = current_user.worker_profile ||
             current_user.create_worker_profile(
-              bio: "", location: "", experience_years: 0, hourly_rate: 0
+              bio: "", location: "Nairobi", experience_years: 0, hourly_rate: 0
             )
 
   render json: {
@@ -45,18 +45,28 @@ end
     end
   end
   def upload_photo
-  profile = current_user.worker_profile
+    profile = current_user.worker_profile
 
-  profile.profile_photo.attach(
-    params[:photo]
-  )
+    unless profile
+      return render json: { error: "Worker profile not found. Please complete your profile first." },
+                    status: :unprocessable_entity
+    end
 
-  render json: {
-    message: "Photo uploaded"
-  }
-end
+    profile.profile_photo.attach(
+      params[:photo]
+    )
+
+    render json: {
+      message: "Photo uploaded"
+    }
+  end
 def upload_certification
   profile = current_user.worker_profile
+
+  unless profile
+    return render json: { error: "Worker profile not found. Please complete your profile first." },
+                  status: :unprocessable_entity
+  end
 
   profile.certifications.attach(
     params[:file]
@@ -84,6 +94,31 @@ end
 
   def update
     profile = current_user.worker_profile
+
+    unless profile
+      return render json: { error: "Worker profile not found. Please complete your profile first." },
+                    status: :unprocessable_entity
+    end
+
+    if profile.update(worker_profile_params)
+      render json: profile
+    else
+      render json: {
+        errors: profile.errors.full_messages
+      }, status: :unprocessable_entity
+    end
+  end
+
+  # Self-service update — scoped entirely to current_user, no :id needed in the URL.
+  # Prevents the "PUT /worker_profiles/null" bug caused by stale/missing profile.id
+  # on the frontend.
+  def update_my_profile
+    profile = current_user.worker_profile
+
+    unless profile
+      return render json: { error: "Worker profile not found. Please complete your profile first." },
+                    status: :unprocessable_entity
+    end
 
     if profile.update(worker_profile_params)
       render json: profile

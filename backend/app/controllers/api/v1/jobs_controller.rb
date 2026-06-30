@@ -64,7 +64,7 @@ end
       :title,
       :description,
       :location,
-      :skills_required,
+      :skill_required,
       :budget
     )
   end

@@ -5375,3 +5375,2159 @@ Processing by Api::V1::WorkerProfilesController#index as JSON
 Completed 200 OK in 49ms (Views: 40.4ms | ActiveRecord: 4.5ms (6 queries, 0 cached) | GC: 0.0ms)
 
 
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN /*application='Backend'*/[0m
+  [1m[36mUser Exists? (5.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'admin@workmatch.com' LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mUser Create (4.8ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "phone", "password_digest", "role", "status", "created_at", "updated_at") VALUES ('Admin', 'User', 'admin@workmatch.com', '0700000000', '$2a$12$rDjTi6FkRMKOZw9rcOfkAejoxHeaJTY4EOeexQNL5jYkIMM6si316', 'admin', 'active', '2026-06-30 10:52:25.683007', '2026-06-30 10:52:25.683007') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN /*application='Backend'*/[0m
+  [1m[36mUser Exists? (5.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'admin@admin.com' LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mUser Create (4.9ms)[0m  [1m[32mINSERT INTO "users" ("first_name", "last_name", "email", "phone", "password_digest", "role", "status", "created_at", "updated_at") VALUES ('Admin', 'User', 'admin@admin.com', '0700000000', '$2a$12$YWZOrLQtTB/ZG5Z63q0CmuQZUn6WWT36DOwq.rU6LJAnu7/MD1A/.', 'admin', 'active', '2026-06-30 11:08:28.988910', '2026-06-30 11:08:28.988910') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT /*application='Backend'*/[0m
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-30 14:08:54 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (2.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by Api::V1::AuthController#login as JSON
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@admin.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 403ms (Views: 1.0ms | ActiveRecord: 16.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-30 14:08:55 +0300
+Processing by Api::V1::AuthController#me as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 5ms (Views: 0.6ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:08:55 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (3.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (2.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (3.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (3.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 107ms (Views: 0.2ms | ActiveRecord: 14.7ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:09:11 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 16ms (Views: 0.1ms | ActiveRecord: 2.8ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:09:35 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 16ms (Views: 0.2ms | ActiveRecord: 2.6ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 14:09:41 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (1.0ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 17ms (Views: 10.3ms | ActiveRecord: 3.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 14:09:48 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 7ms (Views: 2.9ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:09:53 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 2.8ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:11:33 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 44ms (Views: 1.5ms | ActiveRecord: 5.2ms (7 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 14:13:27 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (3.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (1.7ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 56ms (Views: 40.3ms | ActiveRecord: 4.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 14:13:30 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 8ms (Views: 3.6ms | ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:14:09 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (1.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 24ms (Views: 0.2ms | ActiveRecord: 4.4ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:14:29 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (1.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 40ms (Views: 0.2ms | ActiveRecord: 6.5ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 14:17:44 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (2.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 55ms (Views: 34.7ms | ActiveRecord: 4.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 14:17:51 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.5ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 223ms (Views: 2.7ms | ActiveRecord: 1.2ms (2 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/api/v1/my_applications" for 127.0.0.1 at 2026-06-30 14:18:42 +0300
+Processing by Api::V1::JobApplicationsController#my_applications as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (4.1ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 11 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:37:in `my_applications'
+Completed 200 OK in 109ms (Views: 0.2ms | ActiveRecord: 36.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 14:19:11 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 7ms (Views: 2.8ms | ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_applications" for 127.0.0.1 at 2026-06-30 14:19:27 +0300
+Processing by Api::V1::JobApplicationsController#my_applications as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.4ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 11 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:37:in `my_applications'
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 14:19:28 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 7ms (Views: 3.1ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:19:29 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 22ms (Views: 0.2ms | ActiveRecord: 4.2ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:20:12 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 24ms (Views: 0.2ms | ActiveRecord: 3.3ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:28:19 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (185.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (1.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (1.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (2.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (2.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (2.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 278ms (Views: 0.7ms | ActiveRecord: 229.8ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/users" for 127.0.0.1 at 2026-06-30 14:28:23 +0300
+Processing by Api::V1::AdminController#users as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:5:in `users'
+Completed 200 OK in 23ms (Views: 16.1ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 14:28:29 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (1.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 108ms (Views: 99.7ms | ActiveRecord: 2.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 14:28:33 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.6ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 10ms (Views: 4.3ms | ActiveRecord: 1.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/reviews" for 127.0.0.1 at 2026-06-30 14:28:35 +0300
+Processing by Api::V1::AdminController#reviews as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='reviews',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" /*action='reviews',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:34:in `reviews'
+Completed 200 OK in 14ms (Views: 4.8ms | ActiveRecord: 1.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/reviews" for 127.0.0.1 at 2026-06-30 14:28:40 +0300
+Processing by Api::V1::AdminController#reviews as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='reviews',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" /*action='reviews',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:34:in `reviews'
+Completed 200 OK in 7ms (Views: 3.0ms | ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/reviews" for 127.0.0.1 at 2026-06-30 14:28:43 +0300
+Processing by Api::V1::AdminController#reviews as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='reviews',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" /*action='reviews',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:34:in `reviews'
+Completed 200 OK in 6ms (Views: 2.9ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 14:28:47 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 7ms (Views: 3.4ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/users" for 127.0.0.1 at 2026-06-30 14:28:48 +0300
+Processing by Api::V1::AdminController#users as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:5:in `users'
+Completed 200 OK in 12ms (Views: 7.0ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/api/v1/admin/users/1/suspend" for 127.0.0.1 at 2026-06-30 14:28:53 +0300
+Processing by Api::V1::AdminController#suspend_user as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='suspend_user',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='suspend_user',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:37:in `suspend_user'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*action='suspend_user',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:39:in `suspend_user'
+  [1m[36mUser Update (5.3ms)[0m  [1m[33mUPDATE "users" SET "status" = 'suspended', "updated_at" = '2026-06-30 11:28:53.236688' WHERE "users"."id" = 1 /*action='suspend_user',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:39:in `suspend_user'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT /*action='suspend_user',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:39:in `suspend_user'
+Completed 200 OK in 63ms (Views: 0.8ms | ActiveRecord: 32.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 14:39:15 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (140.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (4.1ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 291ms (Views: 23.3ms | ActiveRecord: 186.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/applications" for 127.0.0.1 at 2026-06-30 14:39:17 +0300
+Processing by Api::V1::AdminController#applications as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJobApplication Load (3.5ms)[0m  [1m[34mSELECT "job_applications".* FROM "job_applications" /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:24:in `applications'
+  [1m[36mJob Load (1.0ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = 1 /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:24:in `applications'
+  [1m[36mWorkerProfile Load (3.2ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."id" = 2 /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:24:in `applications'
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (1, 9) /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:24:in `applications'
+  [1m[36mReview Average (4.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 178ms (Views: 0.2ms | ActiveRecord: 47.5ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/reviews" for 127.0.0.1 at 2026-06-30 14:39:19 +0300
+Processing by Api::V1::AdminController#reviews as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='reviews',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" /*action='reviews',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:43:in `reviews'
+Completed 200 OK in 5ms (Views: 1.9ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/users" for 127.0.0.1 at 2026-06-30 14:39:21 +0300
+Processing by Api::V1::AdminController#users as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:5:in `users'
+Completed 200 OK in 12ms (Views: 7.6ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 14:39:22 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 6ms (Views: 2.6ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:39:24 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (1.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 21ms (Views: 0.2ms | ActiveRecord: 4.2ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:40:58 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (3.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (1.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 59ms (Views: 1.2ms | ActiveRecord: 8.8ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/users" for 127.0.0.1 at 2026-06-30 14:41:05 +0300
+Processing by Api::V1::AdminController#users as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:5:in `users'
+Completed 200 OK in 19ms (Views: 15.0ms | ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 14:41:06 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.8ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 11ms (Views: 6.5ms | ActiveRecord: 1.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/applications" for 127.0.0.1 at 2026-06-30 14:41:08 +0300
+Processing by Api::V1::AdminController#applications as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJobApplication Load (0.4ms)[0m  [1m[34mSELECT "job_applications".* FROM "job_applications" /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:24:in `applications'
+  [1m[36mJob Load (2.0ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = 1 /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:24:in `applications'
+  [1m[36mWorkerProfile Load (1.5ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."id" = 2 /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:24:in `applications'
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (1, 9) /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:24:in `applications'
+  [1m[36mReview Average (1.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 38ms (Views: 0.2ms | ActiveRecord: 8.2ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/reviews" for 127.0.0.1 at 2026-06-30 14:41:10 +0300
+Processing by Api::V1::AdminController#reviews as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='reviews',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" /*action='reviews',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:43:in `reviews'
+Completed 200 OK in 6ms (Views: 2.3ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:41:11 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 18ms (Views: 0.2ms | ActiveRecord: 2.7ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 14:41:16 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 70ms (Views: 0.2ms | ActiveRecord: 3.9ms (7 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-30 14:41:33 +0300
+Processing by Api::V1::AuthController#login as JSON
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'jane@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 202ms (Views: 0.7ms | ActiveRecord: 2.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-30 14:41:34 +0300
+Processing by Api::V1::AuthController#me as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 4ms (Views: 0.9ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:41:34 +0300
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:41:34 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (1.1ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 11ms (Views: 4.3ms | ActiveRecord: 1.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.5ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (7.6ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (1.2ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 114ms (Views: 62.7ms | ActiveRecord: 47.1ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:41:38 +0300
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:41:38 +0300
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.6ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mWorkerSkill Load (8.6ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (1.4ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.8ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 40ms (Views: 21.5ms | ActiveRecord: 12.8ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mUser Load (151.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (2.7ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 168ms (Views: 4.1ms | ActiveRecord: 173.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 14:41:42 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 8ms (Views: 4.4ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 14:41:46 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 15ms (Views: 11.5ms | ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:42:04 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.5ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 7ms (Views: 2.9ms | ActiveRecord: 1.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/notifications" for 127.0.0.1 at 2026-06-30 14:42:06 +0300
+Processing by Api::V1::NotificationsController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='notifications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mNotification Load (1.9ms)[0m  [1m[34mSELECT "notifications".* FROM "notifications" WHERE "notifications"."user_id" = 5 /*action='index',application='Backend',controller='notifications'*/[0m
+  ↳ app/controllers/api/v1/notifications_controller.rb:7:in `index'
+Completed 200 OK in 30ms (Views: 4.8ms | ActiveRecord: 16.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/notifications" for 127.0.0.1 at 2026-06-30 14:42:10 +0300
+Processing by Api::V1::NotificationsController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='notifications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mNotification Load (0.4ms)[0m  [1m[34mSELECT "notifications".* FROM "notifications" WHERE "notifications"."user_id" = 5 /*action='index',application='Backend',controller='notifications'*/[0m
+  ↳ app/controllers/api/v1/notifications_controller.rb:7:in `index'
+Completed 200 OK in 7ms (Views: 3.2ms | ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:44:47 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (2.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (1.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 30ms (Views: 8.3ms | ActiveRecord: 4.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 14:44:52 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.5ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 11ms (Views: 6.9ms | ActiveRecord: 1.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:44:53 +0300
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:44:53 +0300
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mWorkerProfile Load (4.6ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mUser Load (8.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerSkill Load (4.2ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mJob Load (4.6ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 21ms (Views: 3.6ms | ActiveRecord: 13.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mReview Average (4.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.7ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 44ms (Views: 23.6ms | ActiveRecord: 16.6ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs/new/matches" for 127.0.0.1 at 2026-06-30 14:46:10 +0300
+Started GET "/api/v1/jobs/new/messages" for 127.0.0.1 at 2026-06-30 14:46:10 +0300
+Started GET "/api/v1/jobs/new/applicants" for 127.0.0.1 at 2026-06-30 14:46:10 +0300
+Processing by Api::V1::JobsController#matches as JSON
+  Parameters: {"id"=>"new"}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='matches',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (7.6ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = NULL LIMIT 1 /*action='matches',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:27:in `matches'
+Completed 404 Not Found in 31ms (ActiveRecord: 9.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Job with 'id'="new"):
+  
+app/controllers/api/v1/jobs_controller.rb:27:in `matches'
+Processing by Api::V1::JobsController#applicants as JSON
+  Parameters: {"id"=>"new"}
+Started GET "/api/v1/jobs/new" for 127.0.0.1 at 2026-06-30 14:46:10 +0300
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='applicants',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (1.5ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = NULL LIMIT 1 /*action='applicants',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:15:in `applicants'
+Completed 404 Not Found in 11ms (ActiveRecord: 2.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Job with 'id'="new"):
+  
+app/controllers/api/v1/jobs_controller.rb:15:in `applicants'
+Processing by Api::V1::JobsController#show as JSON
+  Parameters: {"id"=>"new"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='show',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = NULL LIMIT 1 /*action='show',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:10:in `show'
+Completed 404 Not Found in 5ms (ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Job with 'id'="new"):
+  
+app/controllers/api/v1/jobs_controller.rb:10:in `show'
+Processing by Api::V1::MessagesController#index as JSON
+  Parameters: {"id"=>"new"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='messages'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mMessage Load (2.2ms)[0m  [1m[34mSELECT "messages".* FROM "messages" WHERE "messages"."job_id" IS NULL /*action='index',application='Backend',controller='messages'*/[0m
+  ↳ app/controllers/api/v1/messages_controller.rb:7:in `index'
+Completed 200 OK in 41ms (Views: 2.8ms | ActiveRecord: 19.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:46:15 +0300
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:46:15 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 8ms (Views: 2.8ms | ActiveRecord: 1.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (1.1ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.7ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (0.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.3ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 23ms (Views: 15.9ms | ActiveRecord: 3.7ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs/new/messages" for 127.0.0.1 at 2026-06-30 14:46:22 +0300
+Started GET "/api/v1/jobs/new/applicants" for 127.0.0.1 at 2026-06-30 14:46:22 +0300
+Started GET "/api/v1/jobs/new/matches" for 127.0.0.1 at 2026-06-30 14:46:22 +0300
+Processing by Api::V1::MessagesController#index as JSON
+  Parameters: {"id"=>"new"}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='messages'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mMessage Load (0.7ms)[0m  [1m[34mSELECT "messages".* FROM "messages" WHERE "messages"."job_id" IS NULL /*action='index',application='Backend',controller='messages'*/[0m
+  ↳ app/controllers/api/v1/messages_controller.rb:7:in `index'
+Completed 200 OK in 9ms (Views: 3.6ms | ActiveRecord: 2.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::JobsController#matches as JSON
+  Parameters: {"id"=>"new"}
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='matches',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Started GET "/api/v1/jobs/new" for 127.0.0.1 at 2026-06-30 14:46:22 +0300
+  [1m[36mJob Load (1.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = NULL LIMIT 1 /*action='matches',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:27:in `matches'
+Completed 404 Not Found in 13ms (ActiveRecord: 3.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Job with 'id'="new"):
+  
+app/controllers/api/v1/jobs_controller.rb:27:in `matches'
+Processing by Api::V1::JobsController#applicants as JSON
+  Parameters: {"id"=>"new"}
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='applicants',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (1.6ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = NULL LIMIT 1 /*action='applicants',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:15:in `applicants'
+Completed 404 Not Found in 10ms (ActiveRecord: 3.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Job with 'id'="new"):
+  
+app/controllers/api/v1/jobs_controller.rb:15:in `applicants'
+Processing by Api::V1::JobsController#show as JSON
+  Parameters: {"id"=>"new"}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='show',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.5ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = NULL LIMIT 1 /*action='show',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:10:in `show'
+Completed 404 Not Found in 8ms (ActiveRecord: 1.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Job with 'id'="new"):
+  
+app/controllers/api/v1/jobs_controller.rb:10:in `show'
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:46:30 +0300
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:46:30 +0300
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.7ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.8ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mReview Average (1.1ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mReview Average (1.8ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mJob Load (3.8ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 16ms (Views: 4.5ms | ActiveRecord: 6.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mReview Average (2.3ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 38ms (Views: 26.2ms | ActiveRecord: 8.6ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 14:47:53 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.8ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 14ms (Views: 10.1ms | ActiveRecord: 1.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 14:47:57 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 8ms (Views: 3.5ms | ActiveRecord: 1.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:50:00 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (26.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (1.9ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 91ms (Views: 19.5ms | ActiveRecord: 28.6ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 14:50:48 +0300
+Processing by Api::V1::JobsController#create as JSON
+  Parameters: {"title"=>"fixing shower ", "description"=>"I need an electrician to connect my shower heater", "location"=>"westlands nairobi", "skill_required"=>"Electrician", "budget"=>"0", "preferred_date"=>"2026-06-30", "job"=>{"title"=>"fixing shower ", "description"=>"I need an electrician to connect my shower heater", "location"=>"westlands nairobi", "skill_required"=>"Electrician", "budget"=>"0"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='create',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+[31mUnpermitted parameters: :skill_required, :preferred_date, :job. Context: { controller: Api::V1::JobsController, action: create, request: #<ActionDispatch::Request:0x00000257c254d168>, params: {"title"=>"fixing shower ", "description"=>"I need an electrician to connect my shower heater", "location"=>"westlands nairobi", "skill_required"=>"Electrician", "budget"=>"0", "preferred_date"=>"2026-06-30", "controller"=>"api/v1/jobs", "action"=>"create", "job"=>{"title"=>"fixing shower ", "description"=>"I need an electrician to connect my shower heater", "location"=>"westlands nairobi", "skill_required"=>"Electrician", "budget"=>"0"}} }[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:50:in `create'
+Completed 200 OK in 118ms (Views: 0.1ms | ActiveRecord: 0.8ms (2 queries, 1 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:50:48 +0300
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:50:48 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.6ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 10ms (Views: 3.6ms | ActiveRecord: 2.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (4.0ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (3.8ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (1.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.3ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 39ms (Views: 24.9ms | ActiveRecord: 10.8ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:50:56 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.5ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 8ms (Views: 3.3ms | ActiveRecord: 1.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 14:51:00 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 8ms (Views: 3.6ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:51:01 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 8ms (Views: 4.0ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:51:03 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 9ms (Views: 3.7ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:51:04 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 41ms (Views: 36.1ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 14:51:05 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.7ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 9ms (Views: 3.7ms | ActiveRecord: 1.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:51:07 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 6ms (Views: 2.6ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:51:11 +0300
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.4ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.5ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (0.7ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.4ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 23ms (Views: 17.2ms | ActiveRecord: 3.0ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:51:20 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 7ms (Views: 3.4ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 14:51:22 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 5ms (Views: 2.5ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:51:23 +0300
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:51:23 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 8ms (Views: 3.1ms | ActiveRecord: 2.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.4ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.4ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (0.4ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.4ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 19ms (Views: 13.5ms | ActiveRecord: 2.7ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 14:52:11 +0300
+Processing by Api::V1::JobsController#create as JSON
+  Parameters: {"title"=>"fix shower", "description"=>"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "location"=>"westlands nairobi", "skill_required"=>"Electrician", "budget"=>"", "preferred_date"=>"2026-06-30", "job"=>{"title"=>"fix shower", "description"=>"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "location"=>"westlands nairobi", "skill_required"=>"Electrician", "budget"=>""}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='create',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+[31mUnpermitted parameters: :skill_required, :preferred_date, :job. Context: { controller: Api::V1::JobsController, action: create, request: #<ActionDispatch::Request:0x00000257c1ec4da0>, params: {"title"=>"fix shower", "description"=>"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "location"=>"westlands nairobi", "skill_required"=>"Electrician", "budget"=>"", "preferred_date"=>"2026-06-30", "controller"=>"api/v1/jobs", "action"=>"create", "job"=>{"title"=>"fix shower", "description"=>"aaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "location"=>"westlands nairobi", "skill_required"=>"Electrician", "budget"=>""}} }[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:50:in `create'
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 0.6ms (2 queries, 1 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:52:11 +0300
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:52:11 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 13ms (Views: 6.7ms | ActiveRecord: 2.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.6ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.7ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (0.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.4ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 25ms (Views: 18.5ms | ActiveRecord: 3.4ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:52:21 +0300
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:52:21 +0300
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.4ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.3ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mReview Average (0.9ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 42ms (Views: 33.6ms | ActiveRecord: 5.4ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mUser Load (126.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (2.1ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 142ms (Views: 2.8ms | ActiveRecord: 155.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:52:29 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 6ms (Views: 2.6ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:52:30 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.6ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 9ms (Views: 3.7ms | ActiveRecord: 1.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:52:55 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 8ms (Views: 3.6ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:52:57 +0300
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:52:57 +0300
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mWorkerProfile Load (3.1ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mUser Load (4.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerSkill Load (3.5ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mJob Load (3.0ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 15ms (Views: 4.3ms | ActiveRecord: 7.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mReview Average (3.3ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 36ms (Views: 19.8ms | ActiveRecord: 13.5ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:56:54 +0300
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:56:54 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (3.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (1.2ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 235ms (Views: 11.3ms | ActiveRecord: 36.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (1.2ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (1.0ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (1.0ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 117ms (Views: 83.3ms | ActiveRecord: 11.2ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:56:59 +0300
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:56:59 +0300
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.5ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.7ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mReview Average (1.3ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mUser Load (4.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mReview Average (1.9ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mJob Load (1.8ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 14ms (Views: 4.7ms | ActiveRecord: 6.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mReview Average (2.0ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 37ms (Views: 24.3ms | ActiveRecord: 8.6ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:57:04 +0300
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:57:04 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (8.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 129ms (Views: 48.1ms | ActiveRecord: 9.1ms (2 queries, 0 cached) | GC: 0.2ms)
+
+
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.5ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.7ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 133ms (Views: 92.6ms | ActiveRecord: 3.6ms (6 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 14:57:40 +0300
+Processing by Api::V1::JobsController#create as JSON
+  Parameters: {"title"=>"fix shower", "description"=>"wwwwwwwwwwwwwwwwwwwwwwww", "location"=>"westland Nairobi", "skill_required"=>"Electrician", "budget"=>"", "preferred_date"=>"2026-06-30", "job"=>{"title"=>"fix shower", "description"=>"wwwwwwwwwwwwwwwwwwwwwwww", "location"=>"westland Nairobi", "skill_required"=>"Electrician", "budget"=>""}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='create',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+[31mUnpermitted parameters: :preferred_date, :job. Context: { controller: Api::V1::JobsController, action: create, request: #<ActionDispatch::Request:0x00000257c1b9dac8>, params: {"title"=>"fix shower", "description"=>"wwwwwwwwwwwwwwwwwwwwwwww", "location"=>"westland Nairobi", "skill_required"=>"Electrician", "budget"=>"", "preferred_date"=>"2026-06-30", "controller"=>"api/v1/jobs", "action"=>"create", "job"=>{"title"=>"fix shower", "description"=>"wwwwwwwwwwwwwwwwwwwwwwww", "location"=>"westland Nairobi", "skill_required"=>"Electrician", "budget"=>""}} }[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:50:in `create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*action='create',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:50:in `create'
+  [1m[36mJob Create (13.3ms)[0m  [1m[32mINSERT INTO "jobs" ("customer_id", "title", "description", "location", "skill_required", "budget", "status", "created_at", "updated_at") VALUES (5, 'fix shower', 'wwwwwwwwwwwwwwwwwwwwwwww', 'westland Nairobi', 'Electrician', NULL, 'open', '2026-06-30 11:57:40.957420', '2026-06-30 11:57:40.957420') RETURNING "id" /*action='create',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:50:in `create'
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT /*action='create',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:50:in `create'
+Completed 201 Created in 39ms (Views: 0.6ms | ActiveRecord: 16.1ms (3 queries, 1 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:57:41 +0300
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:57:41 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.7ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 13ms (Views: 4.0ms | ActiveRecord: 3.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.3ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (0.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.4ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 20ms (Views: 15.8ms | ActiveRecord: 2.5ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:57:51 +0300
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:57:51 +0300
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.4ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.5ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mReview Average (1.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mReview Average (1.3ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mJob Load (1.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 16ms (Views: 7.9ms | ActiveRecord: 3.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mReview Average (1.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 34ms (Views: 23.7ms | ActiveRecord: 7.3ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 14:57:53 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 7ms (Views: 4.1ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:57:55 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 8ms (Views: 3.7ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs/2/applicants" for 127.0.0.1 at 2026-06-30 14:57:58 +0300
+Processing by Api::V1::JobsController#applicants as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='applicants',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = 2 LIMIT 1 /*action='applicants',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:15:in `applicants'
+  [1m[36mJobApplication Load (2.9ms)[0m  [1m[34mSELECT "job_applications".* FROM "job_applications" WHERE "job_applications"."job_id" = 2 /*action='applicants',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:17:in `applicants'
+Completed 200 OK in 235ms (Views: 3.0ms | ActiveRecord: 6.7ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:58:00 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.7ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 12ms (Views: 5.2ms | ActiveRecord: 1.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:58:02 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 6ms (Views: 2.7ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs/2/applicants" for 127.0.0.1 at 2026-06-30 14:58:02 +0300
+Processing by Api::V1::JobsController#applicants as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='applicants',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = 2 LIMIT 1 /*action='applicants',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:15:in `applicants'
+  [1m[36mJobApplication Load (0.3ms)[0m  [1m[34mSELECT "job_applications".* FROM "job_applications" WHERE "job_applications"."job_id" = 2 /*action='applicants',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:17:in `applicants'
+Completed 200 OK in 7ms (Views: 2.3ms | ActiveRecord: 1.1ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/notifications" for 127.0.0.1 at 2026-06-30 14:58:03 +0300
+Processing by Api::V1::NotificationsController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='notifications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mNotification Load (1.9ms)[0m  [1m[34mSELECT "notifications".* FROM "notifications" WHERE "notifications"."user_id" = 5 /*action='index',application='Backend',controller='notifications'*/[0m
+  ↳ app/controllers/api/v1/notifications_controller.rb:7:in `index'
+Completed 200 OK in 22ms (Views: 4.2ms | ActiveRecord: 4.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:58:05 +0300
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:58:05 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 8ms (Views: 3.2ms | ActiveRecord: 2.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.3ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (0.3ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.3ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.7ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 17ms (Views: 12.9ms | ActiveRecord: 2.4ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:59:06 +0300
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:59:06 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.5ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 11ms (Views: 4.5ms | ActiveRecord: 2.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.6ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.8ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (0.8ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.7ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 27ms (Views: 19.5ms | ActiveRecord: 4.1ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:59:33 +0300
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:59:33 +0300
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 9ms (Views: 3.5ms | ActiveRecord: 2.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.4ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mReview Average (0.4ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.3ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 19ms (Views: 14.3ms | ActiveRecord: 2.4ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/worker_profiles" for 127.0.0.1 at 2026-06-30 14:59:37 +0300
+Started GET "/api/v1/my_jobs" for 127.0.0.1 at 2026-06-30 14:59:37 +0300
+Processing by Api::V1::WorkerProfilesController#index as JSON
+  [1m[36mUser Load (2.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (1.0ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+  [1m[36mWorkerSkill Load (0.7ms)[0m  [1m[34mSELECT "worker_skills".* FROM "worker_skills" WHERE "worker_skills"."worker_profile_id" IN (1, 2, 3) /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:14:in `index'
+Processing by Api::V1::JobsController#my_jobs as JSON
+  [1m[36mReview Average (1.7ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 1 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mUser Load (5.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mReview Average (4.0ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mJob Load (1.2ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."customer_id" = 5 /*action='my_jobs',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:24:in `my_jobs'
+Completed 200 OK in 14ms (Views: 5.0ms | ActiveRecord: 6.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mReview Average (3.1ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 3 /*action='index',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 36ms (Views: 19.0ms | ActiveRecord: 12.7ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-30 14:59:51 +0300
+Processing by Api::V1::AuthController#login as JSON
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (7.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'john@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 401 Unauthorized in 12ms (Views: 0.4ms | ActiveRecord: 7.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-30 15:00:02 +0300
+Processing by Api::V1::AuthController#login as JSON
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@gmail.comm' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-30 15:00:10 +0300
+Processing by Api::V1::AuthController#login as JSON
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-30 15:00:11 +0300
+Processing by Api::V1::AuthController#login as JSON
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-30 15:00:20 +0300
+Processing by Api::V1::AuthController#login as JSON
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 401 Unauthorized in 3ms (Views: 0.1ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-30 15:00:43 +0300
+Processing by Api::V1::AuthController#login as JSON
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@admin.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 235ms (Views: 1.0ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-30 15:00:43 +0300
+Processing by Api::V1::AuthController#me as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 15:00:43 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (4.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (2.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 32ms (Views: 0.2ms | ActiveRecord: 9.0ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 15:00:50 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 22ms (Views: 0.2ms | ActiveRecord: 3.5ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/users" for 127.0.0.1 at 2026-06-30 15:00:52 +0300
+Processing by Api::V1::AdminController#users as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:5:in `users'
+Completed 200 OK in 11ms (Views: 7.3ms | ActiveRecord: 1.5ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-30 15:01:11 +0300
+Processing by Api::V1::AuthController#login as JSON
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'joe@gmail.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:23:in `login'
+Completed 200 OK in 239ms (Views: 0.6ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-30 15:01:12 +0300
+Processing by Api::V1::AuthController#me as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 4ms (Views: 0.6ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 15:01:12 +0300
+Started GET "/api/v1/my_applications" for 127.0.0.1 at 2026-06-30 15:01:12 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.8ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 10ms (Views: 3.8ms | ActiveRecord: 3.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::JobApplicationsController#my_applications as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.5ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:37:in `my_applications'
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 15:01:17 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 8ms (Views: 3.6ms | ActiveRecord: 1.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_applications" for 127.0.0.1 at 2026-06-30 15:01:18 +0300
+Processing by Api::V1::JobApplicationsController#my_applications as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.4ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:37:in `my_applications'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 15:01:21 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.5ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 7ms (Views: 3.4ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_profile" for 127.0.0.1 at 2026-06-30 15:01:23 +0300
+Processing by Api::V1::WorkerProfilesController#my_profile as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.4ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:17:in `my_profile'
+Completed 200 OK in 302ms (Views: 0.2ms | ActiveRecord: 9.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/api/v1/worker_profiles/upload_photo" for 127.0.0.1 at 2026-06-30 15:02:18 +0300
+Processing by Api::V1::WorkerProfilesController#upload_photo as JSON
+  Parameters: {"photo"=>{}, "worker_profile"=>{}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='upload_photo',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='upload_photo',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:48:in `upload_photo'
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 1.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `profile_photo' for nil):
+  
+app/controllers/api/v1/worker_profiles_controller.rb:50:in `upload_photo'
+Started PATCH "/api/v1/worker_profiles/upload_certification" for 127.0.0.1 at 2026-06-30 15:04:45 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (2.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by Api::V1::WorkerProfilesController#upload_certification as JSON
+  Parameters: {"certification"=>{}, "worker_profile"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='upload_certification',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.4ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='upload_certification',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:64:in `upload_certification'
+Completed 422 Unprocessable Content in 43ms (Views: 0.5ms | ActiveRecord: 13.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mUser Load (92.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mWorkerProfile Load (2.2ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='Backend'*/[0m
+  [1m[36mWorkerProfile Create (10.1ms)[0m  [1m[32mINSERT INTO "worker_profiles" ("user_id", "bio", "location", "experience_years", "hourly_rate", "verified", "average_rating", "created_at", "updated_at") VALUES (7, '', 'Nairobi', 0, 0.0, FALSE, NULL, '2026-06-30 12:06:13.994189', '2026-06-30 12:06:13.994189') RETURNING "id" /*application='Backend'*/[0m
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT /*application='Backend'*/[0m
+  [1m[36mWorkerProfile Load (0.9ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*application='Backend'*/[0m
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*application='Backend'*/[0m
+Started PUT "/api/v1/worker_profiles/null" for 127.0.0.1 at 2026-06-30 15:06:31 +0300
+Processing by Api::V1::WorkerProfilesController#update as JSON
+  Parameters: {"id"=>"null", "bio"=>"Electrician ", "location"=>"WESTLANDS", "experience_years"=>"3YRS", "hourly_rate"=>"0.0", "average_rating"=>0, "reviews_count"=>0, "photo_url"=>nil, "skill"=>"Electrician", "worker_profile"=>{"id"=>"null", "bio"=>"Electrician ", "location"=>"WESTLANDS", "experience_years"=>"3YRS", "hourly_rate"=>"0.0", "average_rating"=>0}}
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='update',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.5ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='update',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:96:in `update'
+[31mUnpermitted parameters: :id, :average_rating, :reviews_count, :photo_url, :skill, :worker_profile. Context: { controller: Api::V1::WorkerProfilesController, action: update, request: #<ActionDispatch::Request:0x00000257c1e49380>, params: {"id"=>"null", "bio"=>"Electrician ", "location"=>"WESTLANDS", "experience_years"=>"3YRS", "hourly_rate"=>"0.0", "average_rating"=>0, "reviews_count"=>0, "photo_url"=>nil, "skill"=>"Electrician", "controller"=>"api/v1/worker_profiles", "action"=>"update", "worker_profile"=>{"id"=>"null", "bio"=>"Electrician ", "location"=>"WESTLANDS", "experience_years"=>"3YRS", "hourly_rate"=>"0.0", "average_rating"=>0}} }[0m
+Completed 422 Unprocessable Content in 95ms (Views: 0.8ms | ActiveRecord: 3.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PUT "/api/v1/worker_profiles/null" for 127.0.0.1 at 2026-06-30 15:06:38 +0300
+Processing by Api::V1::WorkerProfilesController#update as JSON
+  Parameters: {"id"=>"null", "bio"=>"Electrician ", "location"=>"WESTLANDS", "experience_years"=>"3YRS", "hourly_rate"=>"0.0", "average_rating"=>0, "reviews_count"=>0, "photo_url"=>nil, "skill"=>"Electrician", "worker_profile"=>{"id"=>"null", "bio"=>"Electrician ", "location"=>"WESTLANDS", "experience_years"=>"3YRS", "hourly_rate"=>"0.0", "average_rating"=>0}}
+  [1m[36mUser Load (3.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='update',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.8ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='update',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:96:in `update'
+[31mUnpermitted parameters: :id, :average_rating, :reviews_count, :photo_url, :skill, :worker_profile. Context: { controller: Api::V1::WorkerProfilesController, action: update, request: #<ActionDispatch::Request:0x00000257c1e48ac0>, params: {"id"=>"null", "bio"=>"Electrician ", "location"=>"WESTLANDS", "experience_years"=>"3YRS", "hourly_rate"=>"0.0", "average_rating"=>0, "reviews_count"=>0, "photo_url"=>nil, "skill"=>"Electrician", "controller"=>"api/v1/worker_profiles", "action"=>"update", "worker_profile"=>{"id"=>"null", "bio"=>"Electrician ", "location"=>"WESTLANDS", "experience_years"=>"3YRS", "hourly_rate"=>"0.0", "average_rating"=>0}} }[0m
+Completed 422 Unprocessable Content in 12ms (Views: 0.1ms | ActiveRecord: 3.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_profile" for 127.0.0.1 at 2026-06-30 15:09:07 +0300
+  [1m[36mActiveRecord::SchemaMigration Load (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Backend'*/[0m
+Processing by Api::V1::WorkerProfilesController#my_profile as JSON
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.5ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:17:in `my_profile'
+  [1m[36mReview Average (2.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:29:in `my_profile'
+  [1m[36mActiveStorage::Attachment Load (4.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 4 AND "active_storage_attachments"."record_type" = 'WorkerProfile' AND "active_storage_attachments"."name" = 'profile_photo' LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:30:in `my_profile'
+Completed 200 OK in 241ms (Views: 2.3ms | ActiveRecord: 29.3ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/api/v1/my_profile" for 127.0.0.1 at 2026-06-30 15:09:13 +0300
+Processing by Api::V1::WorkerProfilesController#update_my_profile as JSON
+  Parameters: {"bio"=>"", "location"=>"Nairobi", "experience_years"=>0, "hourly_rate"=>"0.0", "worker_profile"=>{"bio"=>"", "location"=>"Nairobi", "experience_years"=>0, "hourly_rate"=>"0.0"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='update_my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='update_my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:116:in `update_my_profile'
+[31mUnpermitted parameter: :worker_profile. Context: { controller: Api::V1::WorkerProfilesController, action: update_my_profile, request: #<ActionDispatch::Request:0x00000257c0b05008>, params: {"bio"=>"", "location"=>"Nairobi", "experience_years"=>0, "hourly_rate"=>"0.0", "controller"=>"api/v1/worker_profiles", "action"=>"update_my_profile", "worker_profile"=>{"bio"=>"", "location"=>"Nairobi", "experience_years"=>0, "hourly_rate"=>"0.0"}} }[0m
+  [1m[36mReview Average (0.6ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='update_my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 18ms (Views: 5.1ms | ActiveRecord: 1.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/api/v1/my_profile" for 127.0.0.1 at 2026-06-30 15:09:22 +0300
+Processing by Api::V1::WorkerProfilesController#update_my_profile as JSON
+  Parameters: {"bio"=>"", "location"=>"Nairobi", "experience_years"=>0, "hourly_rate"=>"0.0", "worker_profile"=>{"bio"=>"", "location"=>"Nairobi", "experience_years"=>0, "hourly_rate"=>"0.0"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='update_my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='update_my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:116:in `update_my_profile'
+[31mUnpermitted parameter: :worker_profile. Context: { controller: Api::V1::WorkerProfilesController, action: update_my_profile, request: #<ActionDispatch::Request:0x00000257c26dd8e8>, params: {"bio"=>"", "location"=>"Nairobi", "experience_years"=>0, "hourly_rate"=>"0.0", "controller"=>"api/v1/worker_profiles", "action"=>"update_my_profile", "worker_profile"=>{"bio"=>"", "location"=>"Nairobi", "experience_years"=>0, "hourly_rate"=>"0.0"}} }[0m
+  [1m[36mReview Average (0.4ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='update_my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 10ms (Views: 3.5ms | ActiveRecord: 1.2ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/notifications" for 127.0.0.1 at 2026-06-30 15:09:28 +0300
+Processing by Api::V1::NotificationsController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='index',application='Backend',controller='notifications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mNotification Load (0.8ms)[0m  [1m[34mSELECT "notifications".* FROM "notifications" WHERE "notifications"."user_id" = 7 /*action='index',application='Backend',controller='notifications'*/[0m
+  ↳ app/controllers/api/v1/notifications_controller.rb:7:in `index'
+Completed 200 OK in 26ms (Views: 6.1ms | ActiveRecord: 4.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_profile" for 127.0.0.1 at 2026-06-30 15:09:29 +0300
+Processing by Api::V1::WorkerProfilesController#my_profile as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.7ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:17:in `my_profile'
+  [1m[36mReview Average (0.8ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:29:in `my_profile'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 4 AND "active_storage_attachments"."record_type" = 'WorkerProfile' AND "active_storage_attachments"."name" = 'profile_photo' LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:30:in `my_profile'
+Completed 200 OK in 31ms (Views: 0.2ms | ActiveRecord: 3.0ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_applications" for 127.0.0.1 at 2026-06-30 15:09:33 +0300
+Processing by Api::V1::JobApplicationsController#my_applications as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:37:in `my_applications'
+  [1m[36mJobApplication Load (2.2ms)[0m  [1m[34mSELECT "job_applications".* FROM "job_applications" WHERE "job_applications"."worker_profile_id" = 4 ORDER BY "job_applications"."created_at" DESC /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:49:in `my_applications'
+Completed 200 OK in 29ms (Views: 0.2ms | ActiveRecord: 4.9ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 15:09:35 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (1.1ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 45ms (Views: 13.3ms | ActiveRecord: 5.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_applications" for 127.0.0.1 at 2026-06-30 15:09:36 +0300
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 15:09:36 +0300
+Processing by Api::V1::JobApplicationsController#my_applications as JSON
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.5ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:37:in `my_applications'
+  [1m[36mJobApplication Load (0.5ms)[0m  [1m[34mSELECT "job_applications".* FROM "job_applications" WHERE "job_applications"."worker_profile_id" = 4 ORDER BY "job_applications"."created_at" DESC /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:49:in `my_applications'
+Completed 200 OK in 12ms (Views: 0.1ms | ActiveRecord: 2.7ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 6ms (Views: 3.0ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_profile" for 127.0.0.1 at 2026-06-30 15:09:39 +0300
+Processing by Api::V1::WorkerProfilesController#my_profile as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:17:in `my_profile'
+  [1m[36mReview Average (0.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:29:in `my_profile'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 4 AND "active_storage_attachments"."record_type" = 'WorkerProfile' AND "active_storage_attachments"."name" = 'profile_photo' LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:30:in `my_profile'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 2.3ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_profile" for 127.0.0.1 at 2026-06-30 15:11:46 +0300
+Processing by Api::V1::WorkerProfilesController#my_profile as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.6ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:17:in `my_profile'
+  [1m[36mReview Average (0.9ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:29:in `my_profile'
+  [1m[36mActiveStorage::Attachment Load (1.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 4 AND "active_storage_attachments"."record_type" = 'WorkerProfile' AND "active_storage_attachments"."name" = 'profile_photo' LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:30:in `my_profile'
+Completed 200 OK in 46ms (Views: 0.5ms | ActiveRecord: 4.1ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_profile" for 127.0.0.1 at 2026-06-30 15:12:58 +0300
+Processing by Api::V1::WorkerProfilesController#my_profile as JSON
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.5ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:17:in `my_profile'
+  [1m[36mReview Average (0.4ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:29:in `my_profile'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 4 AND "active_storage_attachments"."record_type" = 'WorkerProfile' AND "active_storage_attachments"."name" = 'profile_photo' LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:30:in `my_profile'
+Completed 200 OK in 242ms (Views: 0.2ms | ActiveRecord: 2.4ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/notifications" for 127.0.0.1 at 2026-06-30 15:13:03 +0300
+Processing by Api::V1::NotificationsController#index as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='index',application='Backend',controller='notifications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mNotification Load (2.2ms)[0m  [1m[34mSELECT "notifications".* FROM "notifications" WHERE "notifications"."user_id" = 7 /*action='index',application='Backend',controller='notifications'*/[0m
+  ↳ app/controllers/api/v1/notifications_controller.rb:7:in `index'
+Completed 200 OK in 21ms (Views: 14.1ms | ActiveRecord: 2.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_applications" for 127.0.0.1 at 2026-06-30 15:13:05 +0300
+Processing by Api::V1::JobApplicationsController#my_applications as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:37:in `my_applications'
+  [1m[36mJobApplication Load (3.7ms)[0m  [1m[34mSELECT "job_applications".* FROM "job_applications" WHERE "job_applications"."worker_profile_id" = 4 ORDER BY "job_applications"."created_at" DESC /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:49:in `my_applications'
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 4.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 15:13:06 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.7ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 13ms (Views: 8.8ms | ActiveRecord: 1.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_profile" for 127.0.0.1 at 2026-06-30 15:13:08 +0300
+Processing by Api::V1::WorkerProfilesController#my_profile as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:17:in `my_profile'
+  [1m[36mReview Average (0.7ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:29:in `my_profile'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 4 AND "active_storage_attachments"."record_type" = 'WorkerProfile' AND "active_storage_attachments"."name" = 'profile_photo' LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:30:in `my_profile'
+Completed 200 OK in 16ms (Views: 0.1ms | ActiveRecord: 2.3ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started PATCH "/api/v1/my_profile" for 127.0.0.1 at 2026-06-30 15:13:11 +0300
+Processing by Api::V1::WorkerProfilesController#update_my_profile as JSON
+  Parameters: {"bio"=>"", "location"=>"Nairobi", "experience_years"=>0, "hourly_rate"=>"0.0", "worker_profile"=>{"bio"=>"", "location"=>"Nairobi", "experience_years"=>0, "hourly_rate"=>"0.0"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='update_my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='update_my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:116:in `update_my_profile'
+[31mUnpermitted parameter: :worker_profile. Context: { controller: Api::V1::WorkerProfilesController, action: update_my_profile, request: #<ActionDispatch::Request:0x00000257bfd553e0>, params: {"bio"=>"", "location"=>"Nairobi", "experience_years"=>0, "hourly_rate"=>"0.0", "controller"=>"api/v1/worker_profiles", "action"=>"update_my_profile", "worker_profile"=>{"bio"=>"", "location"=>"Nairobi", "experience_years"=>0, "hourly_rate"=>"0.0"}} }[0m
+  [1m[36mReview Average (0.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='update_my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 22ms (Views: 4.3ms | ActiveRecord: 1.3ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_profile" for 127.0.0.1 at 2026-06-30 15:13:11 +0300
+Processing by Api::V1::WorkerProfilesController#my_profile as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:17:in `my_profile'
+  [1m[36mReview Average (0.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:29:in `my_profile'
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = 4 AND "active_storage_attachments"."record_type" = 'WorkerProfile' AND "active_storage_attachments"."name" = 'profile_photo' LIMIT 1 /*action='my_profile',application='Backend',controller='worker_profiles'*/[0m
+  ↳ app/controllers/api/v1/worker_profiles_controller.rb:30:in `my_profile'
+Completed 200 OK in 14ms (Views: 0.1ms | ActiveRecord: 1.9ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs" for 127.0.0.1 at 2026-06-30 15:13:15 +0300
+Started GET "/api/v1/my_applications" for 127.0.0.1 at 2026-06-30 15:13:15 +0300
+Processing by Api::V1::JobsController#index as JSON
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.5ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='index',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:7:in `index'
+Completed 200 OK in 10ms (Views: 4.0ms | ActiveRecord: 2.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::JobApplicationsController#my_applications as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.6ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:37:in `my_applications'
+  [1m[36mJobApplication Load (0.4ms)[0m  [1m[34mSELECT "job_applications".* FROM "job_applications" WHERE "job_applications"."worker_profile_id" = 4 ORDER BY "job_applications"."created_at" DESC /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:49:in `my_applications'
+Completed 200 OK in 17ms (Views: 0.1ms | ActiveRecord: 1.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/job_applications" for 127.0.0.1 at 2026-06-30 15:13:20 +0300
+Processing by Api::V1::JobApplicationsController#create as JSON
+  Parameters: {"job_id"=>1, "job_application"=>{"job_id"=>1}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='create',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='create',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*action='create',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:18:in `create'
+  [1m[36mJob Load (7.2ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = 1 LIMIT 1 /*action='create',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:18:in `create'
+  [1m[36mWorkerProfile Load (0.5ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."id" = 4 LIMIT 1 /*action='create',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:18:in `create'
+  [1m[36mJobApplication Create (18.8ms)[0m  [1m[32mINSERT INTO "job_applications" ("job_id", "worker_profile_id", "status", "created_at", "updated_at") VALUES (1, 4, 'pending', '2026-06-30 12:13:20.468328', '2026-06-30 12:13:20.468328') RETURNING "id" /*action='create',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:18:in `create'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT /*action='create',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:18:in `create'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 1 LIMIT 1 /*action='create',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:20:in `create'
+Completed 201 Created in 360ms (Views: 1.0ms | ActiveRecord: 28.7ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/my_applications" for 127.0.0.1 at 2026-06-30 15:13:20 +0300
+Processing by Api::V1::JobApplicationsController#my_applications as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mWorkerProfile Load (0.3ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."user_id" = 7 LIMIT 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:37:in `my_applications'
+  [1m[36mJobApplication Load (0.3ms)[0m  [1m[34mSELECT "job_applications".* FROM "job_applications" WHERE "job_applications"."worker_profile_id" = 4 ORDER BY "job_applications"."created_at" DESC /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:49:in `my_applications'
+  [1m[36mJob Load (0.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = 1 /*action='my_applications',application='Backend',controller='job_applications'*/[0m
+  ↳ app/controllers/api/v1/job_applications_controller.rb:49:in `my_applications'
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 1.4ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v1/login" for 127.0.0.1 at 2026-06-30 15:13:38 +0300
+Processing by Api::V1::AuthController#login as JSON
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (2.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = 'admin@admin.com' LIMIT 1 /*action='login',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/api/v1/auth_controller.rb:26:in `login'
+Completed 200 OK in 226ms (Views: 0.8ms | ActiveRecord: 2.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/me" for 127.0.0.1 at 2026-06-30 15:13:38 +0300
+Processing by Api::V1::AuthController#me as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='me',application='Backend',controller='auth'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+Completed 200 OK in 4ms (Views: 0.5ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 15:13:38 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 31ms (Views: 0.4ms | ActiveRecord: 4.1ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 15:13:44 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 21ms (Views: 0.1ms | ActiveRecord: 3.0ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/users" for 127.0.0.1 at 2026-06-30 15:13:45 +0300
+Processing by Api::V1::AdminController#users as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" /*action='users',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:5:in `users'
+Completed 200 OK in 13ms (Views: 9.1ms | ActiveRecord: 1.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 15:13:51 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.3ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 6ms (Views: 3.1ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/applications" for 127.0.0.1 at 2026-06-30 15:13:55 +0300
+Processing by Api::V1::AdminController#applications as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJobApplication Load (0.4ms)[0m  [1m[34mSELECT "job_applications".* FROM "job_applications" /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:24:in `applications'
+  [1m[36mJob Load (0.5ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = 1 /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:24:in `applications'
+  [1m[36mWorkerProfile Load (1.4ms)[0m  [1m[34mSELECT "worker_profiles".* FROM "worker_profiles" WHERE "worker_profiles"."id" IN (2, 4) /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:24:in `applications'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IN (1, 9, 7) /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:24:in `applications'
+  [1m[36mReview Average (0.3ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 2 /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+  [1m[36mReview Average (0.5ms)[0m  [1m[34mSELECT AVG("reviews"."rating") FROM "reviews" WHERE "reviews"."worker_profile_id" = 4 /*action='applications',application='Backend',controller='admin'*/[0m
+  ↳ app/models/worker_profile.rb:28:in `average_rating'
+Completed 200 OK in 27ms (Views: 0.3ms | ActiveRecord: 4.0ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/reviews" for 127.0.0.1 at 2026-06-30 15:14:06 +0300
+Processing by Api::V1::AdminController#reviews as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='reviews',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" /*action='reviews',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:43:in `reviews'
+Completed 200 OK in 5ms (Views: 2.3ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/stats" for 127.0.0.1 at 2026-06-30 15:14:08 +0300
+Processing by Api::V1::AdminController#stats as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mUser Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:9:in `stats'
+  [1m[36mUser Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'worker' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:10:in `stats'
+  [1m[36mUser Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "users" WHERE "users"."role" = 'customer' /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:11:in `stats'
+  [1m[36mJob Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "jobs" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:12:in `stats'
+  [1m[36mJobApplication Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "job_applications" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:13:in `stats'
+  [1m[36mReview Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" /*action='stats',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:14:in `stats'
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 2.5ms (7 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/admin/jobs" for 127.0.0.1 at 2026-06-30 15:14:10 +0300
+Processing by Api::V1::AdminController#jobs as JSON
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" /*action='jobs',application='Backend',controller='admin'*/[0m
+  ↳ app/controllers/api/v1/admin_controller.rb:18:in `jobs'
+Completed 200 OK in 10ms (Views: 3.5ms | ActiveRecord: 0.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/api/v1/jobs/2" for 127.0.0.1 at 2026-06-30 15:14:16 +0300
+Started GET "/api/v1/jobs/2/messages" for 127.0.0.1 at 2026-06-30 15:14:16 +0300
+Processing by Api::V1::JobsController#show as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (2.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='show',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mJob Load (0.4ms)[0m  [1m[34mSELECT "jobs".* FROM "jobs" WHERE "jobs"."id" = 2 LIMIT 1 /*action='show',application='Backend',controller='jobs'*/[0m
+  ↳ app/controllers/api/v1/jobs_controller.rb:10:in `show'
+Completed 200 OK in 9ms (Views: 0.6ms | ActiveRecord: 2.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by Api::V1::MessagesController#index as JSON
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = 11 LIMIT 1 /*action='index',application='Backend',controller='messages'*/[0m
+  ↳ app/controllers/application_controller.rb:13:in `current_user'
+  [1m[36mMessage Load (2.3ms)[0m  [1m[34mSELECT "messages".* FROM "messages" WHERE "messages"."job_id" IS NULL /*action='index',application='Backend',controller='messages'*/[0m
+  ↳ app/controllers/api/v1/messages_controller.rb:7:in `index'
+Completed 200 OK in 41ms (Views: 3.6ms | ActiveRecord: 16.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+

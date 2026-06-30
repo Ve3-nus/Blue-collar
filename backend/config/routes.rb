@@ -31,6 +31,7 @@ get '/admin/applications',
     to: 'admin#applications'
 
 get "/my_profile", to: "worker_profiles#my_profile"
+patch "/my_profile", to: "worker_profiles#update_my_profile"
 
 get '/admin/reviews',
     to: 'admin#reviews'
