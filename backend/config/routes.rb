@@ -50,6 +50,10 @@ patch '/jobs/:id/upload_images',
       to: 'jobs#upload_images'
 get '/jobs/:id/messages',
     to: 'messages#index'
+patch '/jobs/:id/status',
+    to: 'jobs#update_status'
+get '/jobs/:id/review',
+    to: 'reviews#for_job'
 get '/analytics',
     to: 'analytics#overview'
 get '/analytics/top_skills',
